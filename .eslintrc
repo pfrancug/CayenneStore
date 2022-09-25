@@ -1,0 +1,46 @@
+{
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaVersion": 2020,
+		"sourceType": "module"
+	},
+	"extends": [
+		"plugin:@typescript-eslint/recommended",
+		"plugin:prettier/recommended",
+		"plugin:react/recommended",
+		"prettier",
+		"react-app"
+	],
+	"plugins": ["prettier"],
+	"env": {
+		"browser": true,
+		"es6": true
+	},
+	"settings": {
+		"react": {
+			"version": "detect"
+		},
+		"rules": {
+			"prettier/prettier": "warn"
+		}
+	},
+	"rules": {
+		"@typescript-eslint/explicit-function-return-type": "off",
+		"@typescript-eslint/explicit-module-boundary-types": "off",
+		"@typescript-eslint/no-unused-vars": "error",
+		"no-duplicate-imports": ["error", { "includeExports": true }],
+		"object-shorthand": ["error", "always"],
+		"prefer-template": "error",
+		"prettier/prettier": ["error", { "endOfLine": "auto" }],
+		"react/dispay-name": "off",
+		"react/react-in-jsx-scope": "off"
+	},
+	"overrides": [
+		{
+			"files": ["src/**"],
+			"rules": {
+				// "no-console": ["error", { "allow": ["error", "info", "warn"] }]
+			}
+		}
+	]
+}

@@ -20,9 +20,6 @@
 			"last 1 safari version"
 		]
 	},
-	"eslintConfig": {
-		"extends": "react-app"
-	},
 	"dependencies": {
 		"@apollo/client": "^3.6.9",
 		"@emotion/react": "^11.10.4",
