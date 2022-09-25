@@ -32,7 +32,7 @@ export const useRealmContext = () => {
 	const context = useContext(RealmContext);
 
 	if (!context) {
-		throw new Error('useUserContext was used outside of its Provider');
+		throw new Error('useRealmContext was used outside of its Provider');
 	}
 
 	return context;

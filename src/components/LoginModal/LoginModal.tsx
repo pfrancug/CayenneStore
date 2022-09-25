@@ -122,8 +122,8 @@ export const LoginModal: VFC<LoginModalProps> = ({
 	};
 
 	const loginAlert = {
-		margin: `${spacing(1)} 0`,
 		justifyContent: 'center',
+		margin: `${spacing(1)} 0`,
 	};
 
 	return (
