@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 
-import { GardenPage } from 'pages';
+import { AppWrapper } from 'app';
 
 const rootNode = document.getElementById('root');
 
-ReactDOM.render(<GardenPage />, rootNode);
+ReactDOM.render(<AppWrapper />, rootNode);
