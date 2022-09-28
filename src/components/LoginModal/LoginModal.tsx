@@ -34,9 +34,9 @@ export const LoginModal: FC<LoginModalProps> = ({
   const { app, setCurrentUser } = useRealmContext();
 
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
   const [loginError, setLoginError] = useState<null | string>(null);
+  const [password, setPassword] = useState('');
 
   useEffect(() => {
     const condition = email.length > 0 && password.length > 0 && !loginError;
