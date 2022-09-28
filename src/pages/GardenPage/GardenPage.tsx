@@ -1,18 +1,18 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import { Container, LinearProgress } from '@mui/material';
 
 import { Cultivars, NavBar } from 'components';
 import { useLoadingContext } from 'contexts';
 
-export const GardenPage: VFC = () => {
-	const { isLoading } = useLoadingContext();
-	return (
-		<>
-			<NavBar />
-			{isLoading ? <LinearProgress color="success" /> : null}
-			<Container maxWidth="lg">
-				<Cultivars />
-			</Container>
-		</>
-	);
+export const GardenPage: FC = () => {
+  const { isLoading } = useLoadingContext();
+  return (
+    <>
+      <NavBar />
+      {isLoading ? <LinearProgress color="success" /> : null}
+      <Container maxWidth="lg">
+        <Cultivars />
+      </Container>
+    </>
+  );
 };

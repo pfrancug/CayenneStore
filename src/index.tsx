@@ -1,7 +1,9 @@
-import ReactDOM from 'react-dom';
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { createRoot } from 'react-dom/client';
 
 import { AppWrapper } from 'app';
 
-const rootNode = document.getElementById('root');
+const container = document.getElementById('root');
+const root = createRoot(container!);
 
-ReactDOM.render(<AppWrapper />, rootNode);
+root.render(<AppWrapper />);

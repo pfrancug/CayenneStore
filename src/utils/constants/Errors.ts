@@ -1,4 +1,4 @@
 export enum Errors {
-	Error = 'Error',
-	UnknownError = 'unknown error',
+  Error = 'Error',
+  UnknownError = 'unknown error',
 }
