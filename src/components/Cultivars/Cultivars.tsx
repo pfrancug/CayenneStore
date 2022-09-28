@@ -10,6 +10,7 @@ import {
   TableRow,
 } from '@mui/material';
 
+import { containerStyle } from './styles';
 import { ErrorAlert } from 'components';
 import { useLoadingContext } from 'contexts';
 import { cultivarsQuery, CultivarQueryProps } from 'gql';
@@ -36,18 +37,24 @@ export const Cultivars: FC = () => {
   const localiseValue = (value?: Maybe<number>) =>
     value ? value.toLocaleString('en-US') : null;
 
+  const columns = [
+    { label: Peppers.Cultivar },
+    { label: Peppers.Spicies },
+    { label: Peppers.Heat, colSpan: 2 },
+    { label: Peppers.Origin },
+  ];
+
   if (cultivars) {
     return (
-      <TableContainer component={Paper} sx={{ mt: 3 }}>
-        <Table>
+      <TableContainer component={Paper} sx={containerStyle}>
+        <Table stickyHeader size="small">
           <TableHead>
             <TableRow>
-              <TableCell align="center">{Peppers.Cultivar}</TableCell>
-              <TableCell align="center">{Peppers.Spicies}</TableCell>
-              <TableCell align="center" colSpan={2}>
-                {Peppers.Heat}
-              </TableCell>
-              <TableCell align="center">{Peppers.Origin}</TableCell>
+              {columns.map(({ colSpan, label }) => (
+                <TableCell align="center" colSpan={colSpan} key={label}>
+                  {label}
+                </TableCell>
+              ))}
             </TableRow>
           </TableHead>
           <TableBody>

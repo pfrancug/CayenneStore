@@ -7,7 +7,6 @@ import {
   IconButton,
   Modal,
   TextField,
-  useTheme,
 } from '@mui/material';
 import {
   ChangeEvent,
@@ -19,6 +18,7 @@ import {
 } from 'react';
 import { Credentials, MongoDBRealmError } from 'realm-web';
 
+import { alertStyle, boxStyle, inputStyle, submitStyle } from './styles';
 import { useRealmContext } from 'contexts';
 import { Errors, Login } from 'utils/constants';
 
@@ -31,13 +31,12 @@ export const LoginModal: FC<LoginModalProps> = ({
   isModalOpen,
   setIsModalOpen,
 }) => {
-  const { palette, spacing } = useTheme();
   const { app, setCurrentUser } = useRealmContext();
 
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
   const [loginError, setLoginError] = useState<null | string>(null);
+  const [password, setPassword] = useState('');
 
   useEffect(() => {
     const condition = email.length > 0 && password.length > 0 && !loginError;
@@ -76,55 +75,6 @@ export const LoginModal: FC<LoginModalProps> = ({
     }
   };
 
-  const loginBoxStyle = {
-    bgcolor: 'background.paper',
-    border: `2px solid ${palette.grey[900]}`,
-    borderRadius: 2,
-    boxShadow: 24,
-    display: 'flex',
-    flexDirection: 'column',
-    left: '50%',
-    padding: 2,
-    position: 'absolute',
-    top: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-
-    '&:focus-visible': {
-      outline: 'none',
-    },
-  };
-
-  const inputStyle = {
-    margin: `${spacing(1)} 0`,
-
-    '& input': {
-      textAlign: 'center',
-    },
-
-    '& input:-webkit-autofill': {
-      transition: 'all 600000s 0s',
-    },
-
-    '& input:-internal-autofill-selected': {
-      transition: 'all 600000s 0s',
-    },
-  };
-
-  const submitButtonStyle = {
-    alignSelf: 'center',
-    color: palette.success.main,
-    margin: `${spacing(1)} 0`,
-    transitionDuration: 500,
-    transitionProperty: 'color',
-    width: 'fit-content',
-  };
-
-  const loginAlert = {
-    justifyContent: 'center',
-    margin: `${spacing(1)} 0`,
-  };
-
   return (
     <Modal
       BackdropComponent={Backdrop}
@@ -134,7 +84,7 @@ export const LoginModal: FC<LoginModalProps> = ({
       open={isModalOpen}
     >
       <Fade in={isModalOpen}>
-        <Box sx={loginBoxStyle}>
+        <Box sx={boxStyle}>
           <TextField
             color="success"
             fullWidth
@@ -160,13 +110,13 @@ export const LoginModal: FC<LoginModalProps> = ({
           <IconButton
             disabled={!isSubmitEnabled}
             onClick={handleLogIn}
-            sx={submitButtonStyle}
+            sx={submitStyle}
           >
             <FingerprintIcon fontSize="large" />
           </IconButton>
 
           {loginError ? (
-            <Alert severity="error" sx={loginAlert} variant="outlined">
+            <Alert severity="error" sx={alertStyle} variant="outlined">
               {loginError}
             </Alert>
           ) : null}
