@@ -1,0 +1,289 @@
+scalar ObjectId
+
+type Cultivar {
+  _id: ObjectId
+  cultivar: String
+  origin: String
+  scoville_scale: CultivarScoville_scale
+  spicies: String
+}
+
+type CultivarScoville_scale {
+  from: Int
+  to: Int
+}
+
+type UpdateManyPayload {
+  matchedCount: Int!
+  modifiedCount: Int!
+}
+
+input CultivarInsertInput {
+  spicies: String
+  _id: ObjectId
+  cultivar: String
+  origin: String
+  scoville_scale: CultivarScoville_scaleInsertInput
+}
+
+input CultivarScoville_scaleInsertInput {
+  from: Int
+  to: Int
+}
+
+input CultivarQueryInput {
+  _id_exists: Boolean
+  scoville_scale_exists: Boolean
+  AND: [CultivarQueryInput!]
+  cultivar_lt: String
+  spicies: String
+  cultivar_in: [String]
+  origin_exists: Boolean
+  _id_gt: ObjectId
+  cultivar_gte: String
+  spicies_nin: [String]
+  scoville_scale: CultivarScoville_scaleQueryInput
+  _id_in: [ObjectId]
+  _id_nin: [ObjectId]
+  _id_lt: ObjectId
+  origin: String
+  spicies_gte: String
+  origin_gt: String
+  cultivar_lte: String
+  spicies_lte: String
+  origin_gte: String
+  spicies_exists: Boolean
+  spicies_ne: String
+  spicies_in: [String]
+  cultivar_ne: String
+  _id: ObjectId
+  origin_lte: String
+  spicies_gt: String
+  origin_ne: String
+  OR: [CultivarQueryInput!]
+  cultivar_exists: Boolean
+  _id_lte: ObjectId
+  origin_lt: String
+  _id_ne: ObjectId
+  spicies_lt: String
+  origin_nin: [String]
+  _id_gte: ObjectId
+  origin_in: [String]
+  cultivar_gt: String
+  cultivar_nin: [String]
+  cultivar: String
+}
+
+input CultivarScoville_scaleQueryInput {
+  to_gt: Int
+  to_nin: [Int]
+  from_nin: [Int]
+  to_lte: Int
+  OR: [CultivarScoville_scaleQueryInput!]
+  from_exists: Boolean
+  from_in: [Int]
+  from_gte: Int
+  from: Int
+  to: Int
+  from_lte: Int
+  AND: [CultivarScoville_scaleQueryInput!]
+  from_lt: Int
+  from_gt: Int
+  to_in: [Int]
+  to_ne: Int
+  from_ne: Int
+  to_gte: Int
+  to_exists: Boolean
+  to_lt: Int
+}
+
+input SeedQueryInput {
+  _id_exists: Boolean
+  id_lte: Int
+  OR: [SeedQueryInput!]
+  parent_lte: Int
+  source: String
+  _id_ne: ObjectId
+  details_in: [String]
+  parent_nin: [Int]
+  parent_exists: Boolean
+  _id_nin: [ObjectId]
+  id_ne: Int
+  source_gt: String
+  date_exists: Boolean
+  cultivar_exists: Boolean
+  date_in: [DateTime]
+  parent: Int
+  source_lte: String
+  _id_gt: ObjectId
+  date: DateTime
+  AND: [SeedQueryInput!]
+  source_exists: Boolean
+  date_lt: DateTime
+  id_exists: Boolean
+  source_ne: String
+  _id: ObjectId
+  parent_in: [Int]
+  _id_gte: ObjectId
+  date_gte: DateTime
+  details_exists: Boolean
+  details_gt: String
+  parent_lt: Int
+  id: Int
+  _id_lt: ObjectId
+  date_ne: DateTime
+  parent_gte: Int
+  id_gte: Int
+  source_nin: [String]
+  details_nin: [String]
+  id_gt: Int
+  id_in: [Int]
+  _id_in: [ObjectId]
+  _id_lte: ObjectId
+  source_in: [String]
+  source_lt: String
+  details_lt: String
+  parent_gt: Int
+  id_nin: [Int]
+  details: String
+  date_lte: DateTime
+  id_lt: Int
+  details_ne: String
+  cultivar: CultivarQueryInput
+  details_lte: String
+  details_gte: String
+  date_gt: DateTime
+  date_nin: [DateTime]
+  parent_ne: Int
+  source_gte: String
+}
+
+input SeedCultivarRelationInput {
+  create: CultivarInsertInput
+  link: String
+}
+
+input CultivarScoville_scaleUpdateInput {
+  from: Int
+  from_inc: Int
+  from_unset: Boolean
+  to: Int
+  to_inc: Int
+  to_unset: Boolean
+}
+
+type Seed {
+  _id: ObjectId
+  cultivar: Cultivar
+  date: DateTime
+  details: String
+  id: Int
+  parent: Int
+  source: String
+}
+
+enum SeedSortByInput {
+  _ID_DESC
+  CULTIVAR_ASC
+  DETAILS_DESC
+  PARENT_DESC
+  SOURCE_ASC
+  DATE_ASC
+  DETAILS_ASC
+  _ID_ASC
+  PARENT_ASC
+  SOURCE_DESC
+  CULTIVAR_DESC
+  DATE_DESC
+  ID_ASC
+  ID_DESC
+}
+
+type Mutation {
+  deleteManyCultivars(query: CultivarQueryInput): DeleteManyPayload
+  deleteManySeeds(query: SeedQueryInput): DeleteManyPayload
+  deleteOneCultivar(query: CultivarQueryInput!): Cultivar
+  deleteOneSeed(query: SeedQueryInput!): Seed
+  insertManyCultivars(data: [CultivarInsertInput!]!): InsertManyPayload
+  insertManySeeds(data: [SeedInsertInput!]!): InsertManyPayload
+  insertOneCultivar(data: CultivarInsertInput!): Cultivar
+  insertOneSeed(data: SeedInsertInput!): Seed
+  replaceOneCultivar(query: CultivarQueryInput, data: CultivarInsertInput!): Cultivar
+  replaceOneSeed(data: SeedInsertInput!, query: SeedQueryInput): Seed
+  updateManyCultivars(query: CultivarQueryInput, set: CultivarUpdateInput!): UpdateManyPayload
+  updateManySeeds(query: SeedQueryInput, set: SeedUpdateInput!): UpdateManyPayload
+  updateOneCultivar(query: CultivarQueryInput, set: CultivarUpdateInput!): Cultivar
+  updateOneSeed(set: SeedUpdateInput!, query: SeedQueryInput): Seed
+  upsertOneCultivar(data: CultivarInsertInput!, query: CultivarQueryInput): Cultivar
+  upsertOneSeed(query: SeedQueryInput, data: SeedInsertInput!): Seed
+}
+
+scalar DateTime
+
+input SeedUpdateInput {
+  _id_unset: Boolean
+  cultivar_unset: Boolean
+  date_unset: Boolean
+  id: Int
+  date: DateTime
+  details: String
+  id_unset: Boolean
+  cultivar: SeedCultivarRelationInput
+  details_unset: Boolean
+  id_inc: Int
+  parent_unset: Boolean
+  parent: Int
+  source: String
+  _id: ObjectId
+  source_unset: Boolean
+  parent_inc: Int
+}
+
+input SeedInsertInput {
+  source: String
+  _id: ObjectId
+  cultivar: SeedCultivarRelationInput
+  date: DateTime
+  details: String
+  id: Int
+  parent: Int
+}
+
+type InsertManyPayload {
+  insertedIds: [ObjectId]!
+}
+
+type DeleteManyPayload {
+  deletedCount: Int!
+}
+
+type Query {
+  cultivar(query: CultivarQueryInput): Cultivar
+  cultivars(limit: Int = 100, sortBy: CultivarSortByInput, query: CultivarQueryInput): [Cultivar]!
+  seed(query: SeedQueryInput): Seed
+  seeds(query: SeedQueryInput, limit: Int = 100, sortBy: SeedSortByInput): [Seed]!
+}
+
+enum CultivarSortByInput {
+  _ID_ASC
+  _ID_DESC
+  CULTIVAR_ASC
+  CULTIVAR_DESC
+  ORIGIN_ASC
+  ORIGIN_DESC
+  SPICIES_ASC
+  SPICIES_DESC
+}
+
+input CultivarUpdateInput {
+  spicies_unset: Boolean
+  origin: String
+  _id: ObjectId
+  cultivar: String
+  origin_unset: Boolean
+  scoville_scale_unset: Boolean
+  spicies: String
+  _id_unset: Boolean
+  cultivar_unset: Boolean
+  scoville_scale: CultivarScoville_scaleUpdateInput
+}
