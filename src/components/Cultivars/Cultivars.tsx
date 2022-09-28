@@ -14,6 +14,7 @@ import { ErrorAlert } from 'components';
 import { useLoadingContext } from 'contexts';
 import { cultivarsQuery, CultivarQueryProps } from 'gql';
 import { Maybe } from 'schemas';
+import { Peppers } from 'utils/constants';
 
 export const Cultivars: VFC = () => {
 	const { setIsLoading } = useLoadingContext();
@@ -42,12 +43,18 @@ export const Cultivars: VFC = () => {
 				<Table>
 					<TableHead>
 						<TableRow>
-							<TableCell align="center">Cutivar</TableCell>
-							<TableCell align="center">Spicies</TableCell>
-							<TableCell align="center" colSpan={2}>
-								Heat (SHU)
+							<TableCell align="center">
+								{Peppers.Cultivar}
 							</TableCell>
-							<TableCell align="center">Origin</TableCell>
+							<TableCell align="center">
+								{Peppers.Spicies}
+							</TableCell>
+							<TableCell align="center" colSpan={2}>
+								{Peppers.Heat}
+							</TableCell>
+							<TableCell align="center">
+								{Peppers.Origin}
+							</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
