@@ -95,7 +95,7 @@ export const Cultivars: FC = () => {
             </TableBody>
           </Table>
         </TableContainer>
-        {currentUser?.providerType === ProviderTypes.LocalUserPass ? (
+        {currentUser?.providerType === ProviderTypes.LocalUserpass ? (
           <AddCultivar />
         ) : null}
       </>

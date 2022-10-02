@@ -19,7 +19,7 @@ export const LoginButton: FC = () => {
     setIsModalOpen(true);
   };
 
-  if (currentUser?.providerType === ProviderTypes.LocalUserPass) {
+  if (currentUser?.providerType === ProviderTypes.LocalUserpass) {
     return (
       <Button
         color="inherit"

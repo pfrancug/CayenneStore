@@ -21,7 +21,7 @@ import { useAddCultivar, useGetCultivars } from 'gql';
 import { AddCultivarInputs, Operations } from 'utils/constants';
 
 export const AddCultivar: FC = () => {
-  const [insertOneCultivar, { loading: addCultivarLoading, data, error }] =
+  const [insertOneCultivar, { data, error, loading: addCultivarLoading }] =
     useAddCultivar();
   const { loading: cutivarsLoading, refetch } = useGetCultivars();
   const { control, handleSubmit, reset } = useForm();
@@ -65,8 +65,8 @@ export const AddCultivar: FC = () => {
       {error ? <ErrorAlert maxWidth={700} message={error.message} /> : null}
       <Unstable_Grid2
         container
-        rowSpacing={1}
         columnSpacing={1}
+        rowSpacing={1}
         sx={gridContainerStyle}
       >
         {AddCultivarInputs.map(({ endAdornment, id, label }) => (
