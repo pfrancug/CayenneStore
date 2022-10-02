@@ -1,9 +1,9 @@
 import { Button } from '@mui/material';
-import { useState, FC } from 'react';
+import { FC, useState } from 'react';
 
-import { LoginModal } from 'components';
+import { LoginDialog } from 'components';
 import { useRealmContext } from 'contexts';
-import { Login } from 'utils/constants';
+import { Login, ProviderTypes } from 'utils/constants';
 
 export const LoginButton: FC = () => {
   const { app, currentUser, setCurrentUser } = useRealmContext();
@@ -19,7 +19,7 @@ export const LoginButton: FC = () => {
     setIsModalOpen(true);
   };
 
-  if (currentUser) {
+  if (currentUser?.providerType === ProviderTypes.LocalUserpass) {
     return (
       <Button
         color="inherit"
@@ -42,7 +42,7 @@ export const LoginButton: FC = () => {
       >
         {Login.SignIn}
       </Button>
-      <LoginModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <LoginDialog isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
     </>
   );
 };

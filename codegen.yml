@@ -4,7 +4,6 @@ generates:
   src/schemas/index.ts:
     plugins:
       - typescript
-      - typescript-operations
       - typescript-react-apollo
       - add:
           content: |
