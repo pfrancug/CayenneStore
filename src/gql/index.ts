@@ -1,1 +1,1 @@
-export * from './cultivarsQuery';
+export * from './cultivars';

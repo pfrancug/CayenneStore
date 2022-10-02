@@ -24,7 +24,7 @@ export const RealmContextProvider: FC<realmContextProviderProps> = ({
   app,
   children,
 }) => {
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [currentUser, setCurrentUser] = useState<User | null>(app.currentUser);
 
   const value: realmContextState = useMemo(
     () => ({ app, currentUser, setCurrentUser }),

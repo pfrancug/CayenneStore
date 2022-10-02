@@ -1,5 +1,6 @@
 export enum Login {
-  Email = 'email',
+  Anonymous = 'Anonymous database access',
+  Login = 'Login',
   Password = 'password',
   SignIn = 'Sign In',
   SignOut = 'Sign Out',

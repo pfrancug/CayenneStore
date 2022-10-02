@@ -9,7 +9,7 @@ export const GardenPage: FC = () => {
   return (
     <>
       <NavBar />
-      {isLoading ? <LinearProgress color="success" /> : null}
+      {isLoading ? <LinearProgress color="warning" /> : null}
       <Container maxWidth="lg">
         <Cultivars />
       </Container>

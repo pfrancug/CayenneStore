@@ -1,5 +1,4 @@
-import { FC, useEffect } from 'react';
-import { useQuery } from '@apollo/client';
+import { FC, useEffect, useMemo } from 'react';
 import {
   Paper,
   Table,
@@ -11,79 +10,95 @@ import {
 } from '@mui/material';
 
 import { containerStyle } from './styles';
-import { ErrorAlert } from 'components';
-import { useLoadingContext } from 'contexts';
-import { cultivarsQuery, CultivarQueryProps } from 'gql';
+import { AddCultivar, ErrorAlert } from 'components';
+import { useLoadingContext, useRealmContext } from 'contexts';
+import { useGetCultivars } from 'gql';
 import { Maybe } from 'schemas';
-import { Peppers } from 'utils/constants';
+import { CultivarTableHeaders, ProviderTypes } from 'utils/constants';
 
 export const Cultivars: FC = () => {
+  const { data, error, loading } = useGetCultivars();
   const { setIsLoading } = useLoadingContext();
-  const { data, error, loading } = useQuery<CultivarQueryProps>(cultivarsQuery);
+  const { currentUser } = useRealmContext();
 
   useEffect(() => {
     setIsLoading(loading);
   }, [loading, setIsLoading]);
 
-  if (loading) {
-    return null;
-  }
+  const { cultivars } = data ?? {};
+  const sortedCultivars = useMemo(
+    () =>
+      cultivars?.sort((a, b) => {
+        if (a.cultivar && b.cultivar) {
+          return a.cultivar.localeCompare(b.cultivar);
+        }
+
+        return 0;
+      }),
+    [cultivars],
+  );
 
   if (error) {
     return <ErrorAlert message={error.message} />;
   }
 
-  const { cultivars } = data ?? {};
+  if (loading || !cultivars) {
+    return null;
+  }
+
   const localiseValue = (value?: Maybe<number>) =>
     value ? value.toLocaleString('en-US') : null;
 
-  const columns = [
-    { label: Peppers.Cultivar },
-    { label: Peppers.Spicies },
-    { label: Peppers.Heat, colSpan: 2 },
-    { label: Peppers.Origin },
-  ];
-
-  if (cultivars) {
+  if (sortedCultivars) {
     return (
-      <TableContainer component={Paper} sx={containerStyle}>
-        <Table stickyHeader size="small">
-          <TableHead>
-            <TableRow>
-              {columns.map(({ colSpan, label }) => (
-                <TableCell align="center" colSpan={colSpan} key={label}>
-                  {label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {cultivars.map(({ cultivar, origin, scoville_scale, spicies }) => (
-              <TableRow key={cultivar}>
-                <TableCell component="th" scope="row">
-                  {cultivar}
-                </TableCell>
-                <TableCell>{spicies}</TableCell>
-                {scoville_scale?.from === null ? (
-                  <TableCell align="center" colSpan={2}>
-                    {localiseValue(scoville_scale?.to)}
+      <>
+        <TableContainer component={Paper} sx={containerStyle}>
+          <Table stickyHeader size="small">
+            <TableHead>
+              <TableRow>
+                {CultivarTableHeaders.map(({ colSpan, label }) => (
+                  <TableCell align="center" colSpan={colSpan} key={label}>
+                    {label}
                   </TableCell>
-                ) : (
-                  <>
-                    <TableCell align="center">
-                      {localiseValue(scoville_scale?.from)}
-                    </TableCell>
-                    <TableCell align="center">
-                      {localiseValue(scoville_scale?.to)}
-                    </TableCell>
-                  </>
-                )}
-                <TableCell align="center">{origin}</TableCell>
+                ))}
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {cultivars.map(
+                ({ _id, cultivar, origin, scoville_scale, spicies }) => (
+                  <TableRow
+                    key={_id as string}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {cultivar}
+                    </TableCell>
+                    <TableCell>{spicies}</TableCell>
+                    {scoville_scale?.from === null ? (
+                      <TableCell align="center" colSpan={2}>
+                        {localiseValue(scoville_scale?.to)}
+                      </TableCell>
+                    ) : (
+                      <>
+                        <TableCell align="center">
+                          {localiseValue(scoville_scale?.from)}
+                        </TableCell>
+                        <TableCell align="center">
+                          {localiseValue(scoville_scale?.to)}
+                        </TableCell>
+                      </>
+                    )}
+                    <TableCell align="center">{origin}</TableCell>
+                  </TableRow>
+                ),
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        {currentUser?.providerType === ProviderTypes.LocalUserPass ? (
+          <AddCultivar />
+        ) : null}
+      </>
     );
   }
 

@@ -5,7 +5,6 @@ import '@fontsource/roboto/700.css';
 
 import { ApolloProvider } from '@apollo/client';
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
-import { lightGreen } from '@mui/material/colors';
 import { FC } from 'react';
 import { App } from 'realm-web';
 
@@ -14,12 +13,7 @@ import { realmConfig } from 'configs';
 import { LoadingContextProvider, RealmContextProvider } from 'contexts';
 import { GardenPage } from 'pages';
 
-const theme = createTheme({
-  palette: {
-    mode: 'dark',
-    success: { main: lightGreen.A200 },
-  },
-});
+const theme = createTheme({ palette: { mode: 'dark' } });
 
 export const AppWrapper: FC = () => {
   const app = new App({

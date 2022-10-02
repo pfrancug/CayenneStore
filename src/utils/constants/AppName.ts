@@ -1,1 +1,4 @@
-export const AppName = 'Garden';
+export enum AppName {
+  Cayenne = 'Cayenne',
+  Store = 'Store',
+}
