@@ -1,320 +1,257 @@
-type CultivarScoville_scale {
+input CultivarScoville_scaleInsertInput {
   from: Int
   to: Int
 }
 
+type UpdateManyPayload {
+  matchedCount: Int!
+  modifiedCount: Int!
+}
+
+input SeedQueryInput {
+  id_in: [Int]
+  _id: ObjectId
+  details_ne: String
+  details_gte: String
+  _id_lte: ObjectId
+  details_gt: String
+  id_gte: Int
+  source: String
+  details_lte: String
+  _id_nin: [ObjectId]
+  _id_ne: ObjectId
+  parent_lt: Int
+  details_lt: String
+  parent_nin: [Int]
+  source_gt: String
+  source_exists: Boolean
+  date_in: [DateTime]
+  _id_in: [ObjectId]
+  cultivar_exists: Boolean
+  source_gte: String
+  parent_exists: Boolean
+  details_exists: Boolean
+  details_in: [String]
+  id_gt: Int
+  date_lt: DateTime
+  source_in: [String]
+  OR: [SeedQueryInput!]
+  date_gt: DateTime
+  details_nin: [String]
+  date_lte: DateTime
+  parent_gte: Int
+  date_exists: Boolean
+  cultivar: CultivarQueryInput
+  parent_gt: Int
+  id_lte: Int
+  date_nin: [DateTime]
+  source_lte: String
+  source_ne: String
+  id_exists: Boolean
+  details: String
+  id_ne: Int
+  _id_gt: ObjectId
+  id_lt: Int
+  _id_lt: ObjectId
+  _id_gte: ObjectId
+  AND: [SeedQueryInput!]
+  parent: Int
+  source_lt: String
+  date_gte: DateTime
+  parent_ne: Int
+  parent_in: [Int]
+  id_nin: [Int]
+  source_nin: [String]
+  date_ne: DateTime
+  id: Int
+  date: DateTime
+  parent_lte: Int
+  _id_exists: Boolean
+}
+
 input CultivarUpdateInput {
-  creation_date_unset: Boolean
-  owner_id: String
+  last_update_date: DateTime
+  scoville_scale: CultivarScoville_scaleUpdateInput
+  origin_unset: Boolean
+  owner_id_unset: Boolean
   species: String
-  origin: String
   cultivar_unset: Boolean
   _id_unset: Boolean
   creation_date: DateTime
-  last_update_date_unset: Boolean
-  cultivar: String
-  last_update_date: DateTime
-  owner_id_unset: Boolean
   scoville_scale_unset: Boolean
-  origin_unset: Boolean
+  owner_id: String
+  creation_date_unset: Boolean
+  cultivar: String
+  last_update_date_unset: Boolean
   _id: ObjectId
-  scoville_scale: CultivarScoville_scaleUpdateInput
+  origin: String
   species_unset: Boolean
 }
 
-input CultivarInsertInput {
-  last_update_date: DateTime
-  origin: String
-  owner_id: String
-  scoville_scale: CultivarScoville_scaleInsertInput
-  species: String
+input SeedInsertInput {
+  source: String
   _id: ObjectId
-  creation_date: DateTime
-  cultivar: String
+  cultivar: SeedCultivarRelationInput
+  date: DateTime
+  details: String
+  id: Int
+  parent: Int
+}
+
+input SeedUpdateInput {
+  _id_unset: Boolean
+  id_unset: Boolean
+  cultivar_unset: Boolean
+  details_unset: Boolean
+  date_unset: Boolean
+  parent_inc: Int
+  source: String
+  details: String
+  id_inc: Int
+  id: Int
+  parent_unset: Boolean
+  cultivar: SeedCultivarRelationInput
+  parent: Int
+  source_unset: Boolean
+  date: DateTime
+  _id: ObjectId
 }
 
 type Query {
   cultivar(query: CultivarQueryInput): Cultivar
   cultivars(sortBy: CultivarSortByInput, query: CultivarQueryInput, limit: Int = 100): [Cultivar]!
   seed(query: SeedQueryInput): Seed
-  seeds(sortBy: SeedSortByInput, query: SeedQueryInput, limit: Int = 100): [Seed]!
+  seeds(query: SeedQueryInput, limit: Int = 100, sortBy: SeedSortByInput): [Seed]!
 }
 
-input CultivarQueryInput {
-  species: String
-  last_update_date_lt: DateTime
-  creation_date_exists: Boolean
-  creation_date_gte: DateTime
-  owner_id_exists: Boolean
-  _id_gte: ObjectId
-  last_update_date_lte: DateTime
-  last_update_date_ne: DateTime
-  cultivar_exists: Boolean
-  origin_lte: String
-  origin_nin: [String]
-  owner_id_gt: String
-  species_ne: String
-  species_lt: String
-  species_lte: String
-  cultivar_in: [String]
-  _id_gt: ObjectId
-  scoville_scale: CultivarScoville_scaleQueryInput
-  last_update_date_gt: DateTime
-  cultivar_gt: String
-  _id_lte: ObjectId
-  origin_exists: Boolean
-  _id_exists: Boolean
-  origin: String
-  _id: ObjectId
-  creation_date_in: [DateTime]
-  scoville_scale_exists: Boolean
-  last_update_date_nin: [DateTime]
-  creation_date_lte: DateTime
-  cultivar_lt: String
-  species_exists: Boolean
-  creation_date_lt: DateTime
-  species_gte: String
-  origin_gte: String
-  creation_date_ne: DateTime
-  owner_id_ne: String
-  species_in: [String]
-  owner_id_gte: String
-  last_update_date_exists: Boolean
-  OR: [CultivarQueryInput!]
-  cultivar: String
-  creation_date: DateTime
-  origin_gt: String
-  _id_ne: ObjectId
-  origin_in: [String]
-  owner_id: String
-  species_gt: String
-  cultivar_lte: String
-  cultivar_nin: [String]
-  last_update_date: DateTime
-  owner_id_lt: String
-  _id_nin: [ObjectId]
-  origin_lt: String
-  cultivar_gte: String
-  last_update_date_gte: DateTime
-  creation_date_nin: [DateTime]
-  _id_lt: ObjectId
-  owner_id_in: [String]
-  last_update_date_in: [DateTime]
-  species_nin: [String]
-  creation_date_gt: DateTime
-  owner_id_lte: String
-  AND: [CultivarQueryInput!]
-  _id_in: [ObjectId]
-  origin_ne: String
-  owner_id_nin: [String]
-  cultivar_ne: String
+input CultivarScoville_scaleQueryInput {
+  from_gt: Int
+  from_nin: [Int]
+  to_lte: Int
+  from_lt: Int
+  from_exists: Boolean
+  from_ne: Int
+  to: Int
+  to_gte: Int
+  from_lte: Int
+  to_ne: Int
+  from: Int
+  to_nin: [Int]
+  from_in: [Int]
+  AND: [CultivarScoville_scaleQueryInput!]
+  to_exists: Boolean
+  OR: [CultivarScoville_scaleQueryInput!]
+  to_gt: Int
+  from_gte: Int
+  to_lt: Int
+  to_in: [Int]
 }
 
-input SeedQueryInput {
-  id_nin: [Int]
-  _id_in: [ObjectId]
-  id: Int
-  _id: ObjectId
-  source_gt: String
-  details_lt: String
-  date_ne: DateTime
-  _id_lte: ObjectId
-  parent_nin: [Int]
-  _id_nin: [ObjectId]
-  details_gt: String
-  id_gt: Int
-  id_lte: Int
-  date_gt: DateTime
-  details_exists: Boolean
-  date_lte: DateTime
-  parent_in: [Int]
-  OR: [SeedQueryInput!]
-  date_lt: DateTime
-  date_in: [DateTime]
-  parent_gt: Int
-  source_lte: String
-  parent_exists: Boolean
-  cultivar_exists: Boolean
-  date_nin: [DateTime]
-  id_ne: Int
-  id_lt: Int
-  parent_lte: Int
-  parent_ne: Int
-  details_gte: String
-  _id_ne: ObjectId
-  details_lte: String
-  id_gte: Int
-  source_ne: String
-  _id_lt: ObjectId
-  date: DateTime
-  details: String
-  source_gte: String
-  date_exists: Boolean
-  _id_exists: Boolean
-  id_exists: Boolean
-  details_nin: [String]
-  details_ne: String
-  parent: Int
-  source_nin: [String]
-  _id_gt: ObjectId
-  parent_gte: Int
-  date_gte: DateTime
-  cultivar: CultivarQueryInput
-  _id_gte: ObjectId
-  source_lt: String
-  id_in: [Int]
-  source_exists: Boolean
-  source: String
-  parent_lt: Int
-  source_in: [String]
-  AND: [SeedQueryInput!]
-  details_in: [String]
-}
-
-input CultivarScoville_scaleInsertInput {
+type CultivarScoville_scale {
   from: Int
   to: Int
 }
 
-input SeedUpdateInput {
-  cultivar: SeedCultivarRelationInput
-  parent: Int
-  cultivar_unset: Boolean
-  id_inc: Int
-  details: String
-  source: String
-  details_unset: Boolean
-  id: Int
-  _id: ObjectId
-  date: DateTime
-  parent_unset: Boolean
-  _id_unset: Boolean
-  id_unset: Boolean
-  parent_inc: Int
-  date_unset: Boolean
-  source_unset: Boolean
-}
-
-scalar DateTime
-
-enum CultivarSortByInput {
-  _ID_ASC
-  ORIGIN_DESC
-  SPECIES_DESC
-  _ID_DESC
-  CULTIVAR_DESC
-  ORIGIN_ASC
-  OWNER_ID_ASC
-  OWNER_ID_DESC
-  SPECIES_ASC
-  CREATION_DATE_ASC
-  CREATION_DATE_DESC
-  CULTIVAR_ASC
-  LAST_UPDATE_DATE_ASC
-  LAST_UPDATE_DATE_DESC
-}
-
 input CultivarScoville_scaleUpdateInput {
-  from_unset: Boolean
-  to: Int
   to_inc: Int
   to_unset: Boolean
   from: Int
   from_inc: Int
-}
-
-input CultivarScoville_scaleQueryInput {
-  to_exists: Boolean
-  AND: [CultivarScoville_scaleQueryInput!]
-  from_nin: [Int]
-  from_gte: Int
-  to_lt: Int
-  to_lte: Int
-  to_gt: Int
-  to_nin: [Int]
+  from_unset: Boolean
   to: Int
-  OR: [CultivarScoville_scaleQueryInput!]
-  from_lt: Int
-  to_ne: Int
-  from_gt: Int
-  from_ne: Int
-  from_exists: Boolean
-  to_in: [Int]
-  from_lte: Int
-  from: Int
-  from_in: [Int]
-  to_gte: Int
-}
-
-type Seed {
-  _id: ObjectId
-  cultivar: Cultivar
-  date: DateTime
-  details: String
-  id: Int
-  parent: Int
-  source: String
-}
-
-type Mutation {
-  deleteManyCultivars(query: CultivarQueryInput): DeleteManyPayload
-  deleteManySeeds(query: SeedQueryInput): DeleteManyPayload
-  deleteOneCultivar(query: CultivarQueryInput!): Cultivar
-  deleteOneSeed(query: SeedQueryInput!): Seed
-  insertManyCultivars(data: [CultivarInsertInput!]!): InsertManyPayload
-  insertManySeeds(data: [SeedInsertInput!]!): InsertManyPayload
-  insertOneCultivar(data: CultivarInsertInput!): Cultivar
-  insertOneSeed(data: SeedInsertInput!): Seed
-  replaceOneCultivar(query: CultivarQueryInput, data: CultivarInsertInput!): Cultivar
-  replaceOneSeed(query: SeedQueryInput, data: SeedInsertInput!): Seed
-  updateManyCultivars(query: CultivarQueryInput, set: CultivarUpdateInput!): UpdateManyPayload
-  updateManySeeds(query: SeedQueryInput, set: SeedUpdateInput!): UpdateManyPayload
-  updateOneCultivar(query: CultivarQueryInput, set: CultivarUpdateInput!): Cultivar
-  updateOneSeed(query: SeedQueryInput, set: SeedUpdateInput!): Seed
-  upsertOneCultivar(query: CultivarQueryInput, data: CultivarInsertInput!): Cultivar
-  upsertOneSeed(query: SeedQueryInput, data: SeedInsertInput!): Seed
-}
-
-input SeedInsertInput {
-  date: DateTime
-  details: String
-  id: Int
-  parent: Int
-  source: String
-  _id: ObjectId
-  cultivar: SeedCultivarRelationInput
 }
 
 type InsertManyPayload {
   insertedIds: [ObjectId]!
 }
 
-type DeleteManyPayload {
-  deletedCount: Int!
+enum CultivarSortByInput {
+  _ID_DESC
+  CULTIVAR_DESC
+  SPECIES_ASC
+  OWNER_ID_ASC
+  LAST_UPDATE_DATE_DESC
+  ORIGIN_ASC
+  ORIGIN_DESC
+  CREATION_DATE_DESC
+  CULTIVAR_ASC
+  LAST_UPDATE_DATE_ASC
+  SPECIES_DESC
+  _ID_ASC
+  CREATION_DATE_ASC
+  OWNER_ID_DESC
 }
 
 scalar ObjectId
 
-enum SeedSortByInput {
-  DATE_DESC
-  DETAILS_DESC
-  DETAILS_ASC
-  ID_ASC
-  ID_DESC
-  PARENT_ASC
-  SOURCE_ASC
-  _ID_DESC
-  CULTIVAR_ASC
-  DATE_ASC
-  PARENT_DESC
-  SOURCE_DESC
-  _ID_ASC
-  CULTIVAR_DESC
-}
-
-type UpdateManyPayload {
-  matchedCount: Int!
-  modifiedCount: Int!
+input CultivarQueryInput {
+  creation_date_lt: DateTime
+  _id_gte: ObjectId
+  origin: String
+  cultivar_ne: String
+  cultivar_gte: String
+  origin_ne: String
+  cultivar: String
+  origin_gte: String
+  owner_id_gte: String
+  origin_gt: String
+  owner_id_lt: String
+  OR: [CultivarQueryInput!]
+  creation_date_gte: DateTime
+  origin_nin: [String]
+  AND: [CultivarQueryInput!]
+  species_exists: Boolean
+  species: String
+  cultivar_nin: [String]
+  owner_id_lte: String
+  species_lte: String
+  creation_date_lte: DateTime
+  cultivar_lte: String
+  last_update_date_gte: DateTime
+  creation_date: DateTime
+  _id_nin: [ObjectId]
+  species_lt: String
+  last_update_date_in: [DateTime]
+  creation_date_ne: DateTime
+  creation_date_in: [DateTime]
+  _id_in: [ObjectId]
+  scoville_scale_exists: Boolean
+  last_update_date_nin: [DateTime]
+  _id: ObjectId
+  owner_id: String
+  species_nin: [String]
+  creation_date_gt: DateTime
+  _id_gt: ObjectId
+  origin_lt: String
+  last_update_date_exists: Boolean
+  last_update_date_gt: DateTime
+  _id_exists: Boolean
+  _id_ne: ObjectId
+  species_in: [String]
+  last_update_date: DateTime
+  _id_lt: ObjectId
+  origin_lte: String
+  owner_id_exists: Boolean
+  creation_date_nin: [DateTime]
+  last_update_date_lte: DateTime
+  scoville_scale: CultivarScoville_scaleQueryInput
+  species_ne: String
+  origin_exists: Boolean
+  cultivar_exists: Boolean
+  creation_date_exists: Boolean
+  species_gte: String
+  cultivar_in: [String]
+  owner_id_ne: String
+  _id_lte: ObjectId
+  cultivar_gt: String
+  owner_id_in: [String]
+  owner_id_gt: String
+  cultivar_lt: String
+  origin_in: [String]
+  species_gt: String
+  owner_id_nin: [String]
+  last_update_date_ne: DateTime
+  last_update_date_lt: DateTime
 }
 
 type Cultivar {
@@ -328,7 +265,70 @@ type Cultivar {
   species: String
 }
 
+type Mutation {
+  deleteManyCultivars(query: CultivarQueryInput): DeleteManyPayload
+  deleteManySeeds(query: SeedQueryInput): DeleteManyPayload
+  deleteOneCultivar(query: CultivarQueryInput!): Cultivar
+  deleteOneSeed(query: SeedQueryInput!): Seed
+  insertManyCultivars(data: [CultivarInsertInput!]!): InsertManyPayload
+  insertManySeeds(data: [SeedInsertInput!]!): InsertManyPayload
+  insertOneCultivar(data: CultivarInsertInput!): Cultivar
+  insertOneSeed(data: SeedInsertInput!): Seed
+  replaceOneCultivar(data: CultivarInsertInput!, query: CultivarQueryInput): Cultivar
+  replaceOneSeed(query: SeedQueryInput, data: SeedInsertInput!): Seed
+  updateManyCultivars(query: CultivarQueryInput, set: CultivarUpdateInput!): UpdateManyPayload
+  updateManySeeds(query: SeedQueryInput, set: SeedUpdateInput!): UpdateManyPayload
+  updateOneCultivar(query: CultivarQueryInput, set: CultivarUpdateInput!): Cultivar
+  updateOneSeed(query: SeedQueryInput, set: SeedUpdateInput!): Seed
+  upsertOneCultivar(data: CultivarInsertInput!, query: CultivarQueryInput): Cultivar
+  upsertOneSeed(query: SeedQueryInput, data: SeedInsertInput!): Seed
+}
+
+scalar DateTime
+
+type Seed {
+  _id: ObjectId
+  cultivar: Cultivar
+  date: DateTime
+  details: String
+  id: Int
+  parent: Int
+  source: String
+}
+
+enum SeedSortByInput {
+  CULTIVAR_ASC
+  CULTIVAR_DESC
+  DATE_ASC
+  DETAILS_ASC
+  DETAILS_DESC
+  _ID_DESC
+  DATE_DESC
+  ID_ASC
+  PARENT_ASC
+  SOURCE_ASC
+  _ID_ASC
+  SOURCE_DESC
+  PARENT_DESC
+  ID_DESC
+}
+
 input SeedCultivarRelationInput {
   create: CultivarInsertInput
   link: String
+}
+
+input CultivarInsertInput {
+  species: String
+  _id: ObjectId
+  creation_date: DateTime
+  cultivar: String
+  last_update_date: DateTime
+  origin: String
+  owner_id: String
+  scoville_scale: CultivarScoville_scaleInsertInput
+}
+
+type DeleteManyPayload {
+  deletedCount: Int!
 }
