@@ -50,12 +50,12 @@ export const AddCultivar: FC = () => {
           cultivar: data.cultivar.length ? data.cultivar.trim() : null,
           last_update_date: date,
           origin: data.origin.length ? data.origin.trim() : null,
+          owner_id: currentUser?.id ?? null,
           scoville_scale: {
             from: data.heatFrom.length ? data.heatFrom : null,
             to: data.heatTo.length ? data.heatTo : null,
           },
           species: data.species.length ? data.species.trim() : null,
-          user: currentUser?.id ?? null,
         },
       },
     });
@@ -83,7 +83,7 @@ export const AddCultivar: FC = () => {
               render={({ field }) => (
                 <TextField
                   {...field}
-                  color="warning"
+                  color="success"
                   InputProps={{
                     endAdornment: endAdornment ? (
                       <InputAdornment position="end">
@@ -103,7 +103,7 @@ export const AddCultivar: FC = () => {
         ))}
         <Unstable_Grid2 sm={6} xs={12} sx={gridStyle}>
           <Button
-            color="warning"
+            color="success"
             sx={submitStyle}
             type="submit"
             variant="outlined"

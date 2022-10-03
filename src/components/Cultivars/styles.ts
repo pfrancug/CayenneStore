@@ -18,7 +18,7 @@ export const tableHeaderStyle: SxProps<Theme> = ({ palette, typography }) => ({
   fontWeight: typography.fontWeightBold,
   textTransform: 'uppercase',
 
-  ':first-child': {
+  ':first-of-type': {
     left: 0,
     position: 'sticky',
     zIndex: 3,

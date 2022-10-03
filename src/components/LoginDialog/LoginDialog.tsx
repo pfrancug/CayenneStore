@@ -70,7 +70,7 @@ export const LoginDialog: FC<LoginModalProps> = ({
     <Dialog onClose={handleCloseDialog} open={isModalOpen}>
       <DialogContent sx={{ width: 300 }}>
         <TextField
-          color="warning"
+          color="success"
           fullWidth
           label={Login.Login}
           onChange={(event) => handleEmailChange(event)}
@@ -81,7 +81,7 @@ export const LoginDialog: FC<LoginModalProps> = ({
         />
 
         <TextField
-          color="warning"
+          color="success"
           fullWidth
           label={Login.Password}
           onChange={(event) => handlePasswordChange(event)}
@@ -98,7 +98,7 @@ export const LoginDialog: FC<LoginModalProps> = ({
         ) : null}
 
         <Button
-          color="warning"
+          color="success"
           disabled={!isSubmitEnabled}
           onClick={handleLogIn}
           sx={submitStyle}

@@ -22,13 +22,19 @@ import { Maybe } from 'schemas';
 import { CultivarTableHeaders, ProviderTypes } from 'utils/constants';
 
 export const Cultivars: FC = () => {
-  const { data, error, loading } = useGetCultivars();
+  const { data, error, loading, refetch } = useGetCultivars();
   const { setIsLoading } = useLoadingContext();
   const { currentUser } = useRealmContext();
 
   useEffect(() => {
     setIsLoading(loading);
   }, [loading, setIsLoading]);
+
+  useEffect(() => {
+    if (currentUser?.id) {
+      refetch();
+    }
+  }, [currentUser?.id, refetch]);
 
   const { cultivars } = data ?? {};
   const sortedCultivars = useMemo(
