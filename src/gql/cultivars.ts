@@ -18,7 +18,7 @@ export const getCultivars = gql`
         from
         to
       }
-      spicies
+      species
       user
     }
   }
@@ -37,7 +37,7 @@ export const addCultivar = gql`
         from
         to
       }
-      spicies
+      species
       user
     }
   }

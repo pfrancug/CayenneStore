@@ -75,7 +75,7 @@ export const Cultivars: FC = () => {
             </TableHead>
             <TableBody>
               {cultivars.map(
-                ({ _id, cultivar, origin, scoville_scale, spicies }) => (
+                ({ _id, cultivar, origin, scoville_scale, species }) => (
                   <TableRow key={_id as string}>
                     <TableCell
                       component="th"
@@ -84,7 +84,7 @@ export const Cultivars: FC = () => {
                     >
                       {cultivar}
                     </TableCell>
-                    <TableCell sx={cellStyle}>{spicies}</TableCell>
+                    <TableCell sx={cellStyle}>{species}</TableCell>
                     {scoville_scale?.from === null ? (
                       <TableCell align="center" colSpan={2} sx={cellStyle}>
                         {localiseValue(scoville_scale?.to)}

@@ -37,7 +37,7 @@ export type Cultivar = {
   last_update_date?: Maybe<Scalars['DateTime']>;
   origin?: Maybe<Scalars['String']>;
   scoville_scale?: Maybe<CultivarScoville_scale>;
-  spicies?: Maybe<Scalars['String']>;
+  species?: Maybe<Scalars['String']>;
   user?: Maybe<Scalars['String']>;
 };
 
@@ -48,7 +48,7 @@ export type CultivarInsertInput = {
   last_update_date?: InputMaybe<Scalars['DateTime']>;
   origin?: InputMaybe<Scalars['String']>;
   scoville_scale?: InputMaybe<CultivarScoville_scaleInsertInput>;
-  spicies?: InputMaybe<Scalars['String']>;
+  species?: InputMaybe<Scalars['String']>;
   user?: InputMaybe<Scalars['String']>;
 };
 
@@ -102,15 +102,15 @@ export type CultivarQueryInput = {
   origin_nin?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   scoville_scale?: InputMaybe<CultivarScoville_scaleQueryInput>;
   scoville_scale_exists?: InputMaybe<Scalars['Boolean']>;
-  spicies?: InputMaybe<Scalars['String']>;
-  spicies_exists?: InputMaybe<Scalars['Boolean']>;
-  spicies_gt?: InputMaybe<Scalars['String']>;
-  spicies_gte?: InputMaybe<Scalars['String']>;
-  spicies_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  spicies_lt?: InputMaybe<Scalars['String']>;
-  spicies_lte?: InputMaybe<Scalars['String']>;
-  spicies_ne?: InputMaybe<Scalars['String']>;
-  spicies_nin?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  species?: InputMaybe<Scalars['String']>;
+  species_exists?: InputMaybe<Scalars['Boolean']>;
+  species_gt?: InputMaybe<Scalars['String']>;
+  species_gte?: InputMaybe<Scalars['String']>;
+  species_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  species_lt?: InputMaybe<Scalars['String']>;
+  species_lte?: InputMaybe<Scalars['String']>;
+  species_ne?: InputMaybe<Scalars['String']>;
+  species_nin?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   user?: InputMaybe<Scalars['String']>;
   user_exists?: InputMaybe<Scalars['Boolean']>;
   user_gt?: InputMaybe<Scalars['String']>;
@@ -174,8 +174,8 @@ export enum CultivarSortByInput {
   LAST_UPDATE_DATE_DESC = 'LAST_UPDATE_DATE_DESC',
   ORIGIN_ASC = 'ORIGIN_ASC',
   ORIGIN_DESC = 'ORIGIN_DESC',
-  SPICIES_ASC = 'SPICIES_ASC',
-  SPICIES_DESC = 'SPICIES_DESC',
+  SPECIES_ASC = 'SPECIES_ASC',
+  SPECIES_DESC = 'SPECIES_DESC',
   USER_ASC = 'USER_ASC',
   USER_DESC = 'USER_DESC',
   _ID_ASC = '_ID_ASC',
@@ -195,8 +195,8 @@ export type CultivarUpdateInput = {
   origin_unset?: InputMaybe<Scalars['Boolean']>;
   scoville_scale?: InputMaybe<CultivarScoville_scaleUpdateInput>;
   scoville_scale_unset?: InputMaybe<Scalars['Boolean']>;
-  spicies?: InputMaybe<Scalars['String']>;
-  spicies_unset?: InputMaybe<Scalars['Boolean']>;
+  species?: InputMaybe<Scalars['String']>;
+  species_unset?: InputMaybe<Scalars['Boolean']>;
   user?: InputMaybe<Scalars['String']>;
   user_unset?: InputMaybe<Scalars['Boolean']>;
 };
@@ -336,6 +336,7 @@ export type Seed = {
   _id?: Maybe<Scalars['ObjectId']>;
   cultivar?: Maybe<Cultivar>;
   date?: Maybe<Scalars['DateTime']>;
+  details?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   parent?: Maybe<Scalars['Int']>;
   source?: Maybe<Scalars['String']>;
@@ -350,6 +351,7 @@ export type SeedInsertInput = {
   _id?: InputMaybe<Scalars['ObjectId']>;
   cultivar?: InputMaybe<SeedCultivarRelationInput>;
   date?: InputMaybe<Scalars['DateTime']>;
+  details?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
   parent?: InputMaybe<Scalars['Int']>;
   source?: InputMaybe<Scalars['String']>;
@@ -378,6 +380,15 @@ export type SeedQueryInput = {
   date_lte?: InputMaybe<Scalars['DateTime']>;
   date_ne?: InputMaybe<Scalars['DateTime']>;
   date_nin?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  details?: InputMaybe<Scalars['String']>;
+  details_exists?: InputMaybe<Scalars['Boolean']>;
+  details_gt?: InputMaybe<Scalars['String']>;
+  details_gte?: InputMaybe<Scalars['String']>;
+  details_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  details_lt?: InputMaybe<Scalars['String']>;
+  details_lte?: InputMaybe<Scalars['String']>;
+  details_ne?: InputMaybe<Scalars['String']>;
+  details_nin?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   id?: InputMaybe<Scalars['Int']>;
   id_exists?: InputMaybe<Scalars['Boolean']>;
   id_gt?: InputMaybe<Scalars['Int']>;
@@ -412,6 +423,8 @@ export enum SeedSortByInput {
   CULTIVAR_DESC = 'CULTIVAR_DESC',
   DATE_ASC = 'DATE_ASC',
   DATE_DESC = 'DATE_DESC',
+  DETAILS_ASC = 'DETAILS_ASC',
+  DETAILS_DESC = 'DETAILS_DESC',
   ID_ASC = 'ID_ASC',
   ID_DESC = 'ID_DESC',
   PARENT_ASC = 'PARENT_ASC',
@@ -429,6 +442,8 @@ export type SeedUpdateInput = {
   cultivar_unset?: InputMaybe<Scalars['Boolean']>;
   date?: InputMaybe<Scalars['DateTime']>;
   date_unset?: InputMaybe<Scalars['Boolean']>;
+  details?: InputMaybe<Scalars['String']>;
+  details_unset?: InputMaybe<Scalars['Boolean']>;
   id?: InputMaybe<Scalars['Int']>;
   id_inc?: InputMaybe<Scalars['Int']>;
   id_unset?: InputMaybe<Scalars['Boolean']>;
