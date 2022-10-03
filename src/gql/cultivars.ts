@@ -14,17 +14,20 @@ export const getCultivars = gql`
       cultivar
       last_update_date
       origin
+      owner_id
       scoville_scale {
         from
         to
       }
       species
-      user
     }
   }
 `;
 
-export const useGetCultivars = () => useQuery<CultivarArrayProps>(getCultivars);
+export const useGetCultivars = () =>
+  useQuery<CultivarArrayProps>(getCultivars, {
+    notifyOnNetworkStatusChange: true,
+  });
 
 export const addCultivar = gql`
   mutation AddCultivar($data: CultivarInsertInput!) {
@@ -33,12 +36,12 @@ export const addCultivar = gql`
       cultivar
       last_update_date
       origin
+      owner_id
       scoville_scale {
         from
         to
       }
       species
-      user
     }
   }
 `;

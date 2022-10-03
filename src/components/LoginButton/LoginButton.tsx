@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Badge, Button } from '@mui/material';
 import { FC, useState } from 'react';
 
 import { LoginDialog } from 'components';
@@ -19,30 +19,36 @@ export const LoginButton: FC = () => {
     setIsModalOpen(true);
   };
 
-  if (currentUser?.providerType === ProviderTypes.LocalUserpass) {
-    return (
+  const LoginButton: FC<{ login?: boolean }> = ({ login }) => (
+    <>
       <Button
-        color="inherit"
-        onClick={handleLogOut}
+        color="primary"
+        onClick={login ? handleOpenModal : handleLogOut}
         size="small"
-        variant="text"
+        variant="contained"
       >
-        {Login.SignOut}
+        {login ? Login.SignIn : Login.SignOut}
       </Button>
+      {login ? (
+        <LoginDialog
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+        />
+      ) : null}
+    </>
+  );
+
+  if (currentUser?.providerType === ProviderTypes.LocalUserpass) {
+    return <LoginButton />;
+  }
+
+  if (currentUser?.providerType === ProviderTypes.AnonUser) {
+    return (
+      <Badge color="success" variant="dot">
+        <LoginButton login />
+      </Badge>
     );
   }
 
-  return (
-    <>
-      <Button
-        color="inherit"
-        onClick={handleOpenModal}
-        size="small"
-        variant="text"
-      >
-        {Login.SignIn}
-      </Button>
-      <LoginDialog isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
-    </>
-  );
+  return <LoginButton login />;
 };
