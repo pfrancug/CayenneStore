@@ -10,6 +10,7 @@ import {
 import { Controller, useForm } from 'react-hook-form';
 
 import {
+  containerStyle,
   gridContainerStyle,
   gridStyle,
   inputStyle,
@@ -61,7 +62,11 @@ export const AddCultivar: FC = () => {
   };
 
   return (
-    <Container component="form" onSubmit={handleSubmit(onSubmit)}>
+    <Container
+      component="form"
+      onSubmit={handleSubmit(onSubmit)}
+      sx={containerStyle}
+    >
       {error ? <ErrorAlert maxWidth={700} message={error.message} /> : null}
       <Unstable_Grid2
         container
@@ -70,7 +75,7 @@ export const AddCultivar: FC = () => {
         sx={gridContainerStyle}
       >
         {AddCultivarInputs.map(({ endAdornment, id, label }) => (
-          <Unstable_Grid2 key={label} xs={6}>
+          <Unstable_Grid2 key={label} sm={6} xs={12}>
             <Controller
               control={control}
               defaultValue=""
@@ -96,7 +101,7 @@ export const AddCultivar: FC = () => {
             />
           </Unstable_Grid2>
         ))}
-        <Unstable_Grid2 sx={gridStyle} xs={6}>
+        <Unstable_Grid2 sm={6} xs={12} sx={gridStyle}>
           <Button
             color="warning"
             sx={submitStyle}

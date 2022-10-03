@@ -1,7 +1,7 @@
 export enum Login {
   Anonymous = 'Anonymous database access',
   Login = 'Login',
-  Password = 'password',
+  Password = 'Password',
   SignIn = 'Sign In',
   SignOut = 'Sign Out',
 }

@@ -9,7 +9,12 @@ import {
   TableRow,
 } from '@mui/material';
 
-import { containerStyle } from './styles';
+import {
+  cellStyle,
+  columnHeaderStyle,
+  containerStyle,
+  tableHeaderStyle,
+} from './styles';
 import { AddCultivar, ErrorAlert } from 'components';
 import { useLoadingContext, useRealmContext } from 'contexts';
 import { useGetCultivars } from 'gql';
@@ -57,7 +62,12 @@ export const Cultivars: FC = () => {
             <TableHead>
               <TableRow>
                 {CultivarTableHeaders.map(({ colSpan, label }) => (
-                  <TableCell align="center" colSpan={colSpan} key={label}>
+                  <TableCell
+                    align="center"
+                    colSpan={colSpan}
+                    key={label}
+                    sx={tableHeaderStyle}
+                  >
                     {label}
                   </TableCell>
                 ))}
@@ -66,29 +76,32 @@ export const Cultivars: FC = () => {
             <TableBody>
               {cultivars.map(
                 ({ _id, cultivar, origin, scoville_scale, spicies }) => (
-                  <TableRow
-                    key={_id as string}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
+                  <TableRow key={_id as string}>
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      sx={columnHeaderStyle}
+                    >
                       {cultivar}
                     </TableCell>
-                    <TableCell>{spicies}</TableCell>
+                    <TableCell sx={cellStyle}>{spicies}</TableCell>
                     {scoville_scale?.from === null ? (
-                      <TableCell align="center" colSpan={2}>
+                      <TableCell align="center" colSpan={2} sx={cellStyle}>
                         {localiseValue(scoville_scale?.to)}
                       </TableCell>
                     ) : (
                       <>
-                        <TableCell align="center">
+                        <TableCell align="center" sx={cellStyle}>
                           {localiseValue(scoville_scale?.from)}
                         </TableCell>
-                        <TableCell align="center">
+                        <TableCell align="center" sx={cellStyle}>
                           {localiseValue(scoville_scale?.to)}
                         </TableCell>
                       </>
                     )}
-                    <TableCell align="center">{origin}</TableCell>
+                    <TableCell align="center" sx={cellStyle}>
+                      {origin}
+                    </TableCell>
                   </TableRow>
                 ),
               )}

@@ -1,14 +1,21 @@
-export const gridContainerStyle = {
-  margin: 'auto',
-  width: 700,
-};
+import { SxProps, Theme } from '@mui/material';
 
-export const gridStyle = {
+export const containerStyle: SxProps<Theme> = ({ spacing }) => ({
+  marginBottom: spacing(2),
+  padding: 0,
+});
+
+export const gridContainerStyle: SxProps<Theme> = () => ({
+  margin: 'auto',
+  maxWidth: 700,
+});
+
+export const gridStyle: SxProps<Theme> = () => ({
   alignItems: 'flex-end',
   display: 'flex',
-};
+});
 
-export const inputStyle = {
+export const inputStyle: SxProps<Theme> = () => ({
   width: '100%',
 
   '& input:-webkit-autofill': {
@@ -18,7 +25,7 @@ export const inputStyle = {
   '& input:-internal-autofill-selected': {
     transition: 'all 600000s 0s',
   },
-};
+});
 
 export const submitStyle = {
   height: '100%',

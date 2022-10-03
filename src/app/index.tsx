@@ -4,16 +4,15 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 import { ApolloProvider } from '@apollo/client';
-import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
+import { CssBaseline, ThemeProvider } from '@mui/material';
 import { FC } from 'react';
 import { App } from 'realm-web';
 
+import { theme } from './styles';
 import { client } from 'apollo';
 import { realmConfig } from 'configs';
 import { LoadingContextProvider, RealmContextProvider } from 'contexts';
 import { GardenPage } from 'pages';
-
-const theme = createTheme({ palette: { mode: 'dark' } });
 
 export const AppWrapper: FC = () => {
   const app = new App({
