@@ -6,7 +6,7 @@ enum Peppers {
   HeatTo = 'Heat MAX',
   Origin = 'Origin',
   SHU = 'SHU',
-  Spicies = 'Spicies',
+  Species = 'Species',
 }
 
 enum CultivarProps {
@@ -14,19 +14,19 @@ enum CultivarProps {
   HeatFrom = 'heatFrom',
   HeatTo = 'heatTo',
   Origin = 'origin',
-  Spicies = 'spicies',
+  Species = 'species',
 }
 
 export const CultivarTableHeaders = [
   { label: Peppers.Cultivar },
-  { label: Peppers.Spicies },
+  { label: Peppers.Species },
   { label: Peppers.Heat, colSpan: 2 },
   { label: Peppers.Origin },
 ];
 
 export const AddCultivarInputs = [
   { id: CultivarProps.Cultivar, label: Peppers.Cultivar },
-  { id: CultivarProps.Spicies, label: Peppers.Spicies },
+  { id: CultivarProps.Species, label: Peppers.Species },
   {
     id: CultivarProps.HeatFrom,
     label: Peppers.HeatFrom,

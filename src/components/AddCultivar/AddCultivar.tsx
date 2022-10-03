@@ -54,7 +54,7 @@ export const AddCultivar: FC = () => {
             from: data.heatFrom.length ? data.heatFrom : null,
             to: data.heatTo.length ? data.heatTo : null,
           },
-          spicies: data.spicies.length ? data.spicies.trim() : null,
+          species: data.species.length ? data.species.trim() : null,
           user: currentUser?.id ?? null,
         },
       },
