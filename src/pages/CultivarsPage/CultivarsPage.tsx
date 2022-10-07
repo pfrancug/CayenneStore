@@ -21,7 +21,7 @@ import { useGetCultivars } from 'gql';
 import { Maybe } from 'schemas';
 import { CultivarTableHeaders, ProviderTypes } from 'utils/constants';
 
-export const Cultivars: FC = () => {
+export const CultivarsPage: FC = () => {
   const { data, error, loading, refetch } = useGetCultivars();
   const { setIsLoading } = useLoadingContext();
   const { currentUser } = useRealmContext();
