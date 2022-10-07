@@ -1,6 +1,6 @@
-import { FC } from 'react';
 import WhatshotTwoToneIcon from '@mui/icons-material/WhatshotTwoTone';
 import { Box, Button, Link, Typography } from '@mui/material';
+import { FC } from 'react';
 
 import {
   boxStyle,
