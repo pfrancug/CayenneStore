@@ -6,13 +6,19 @@ import '@fontsource/roboto/700.css';
 import { ApolloProvider } from '@apollo/client';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { FC } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { App } from 'realm-web';
 
 import { theme } from './styles';
 import { client } from 'apollo';
 import { realmConfig } from 'configs';
 import { LoadingContextProvider, RealmContextProvider } from 'contexts';
-import { GardenPage } from 'pages';
+import { Navigation } from 'containers';
+import { CultivarsPage, ErrorPage } from 'pages';
+
+const router = createBrowserRouter([
+  { path: '/', element: <CultivarsPage />, errorElement: <ErrorPage /> },
+]);
 
 export const AppWrapper: FC = () => {
   const app = new App({
@@ -26,7 +32,9 @@ export const AppWrapper: FC = () => {
         <LoadingContextProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <GardenPage />
+            <Navigation>
+              <RouterProvider router={router} />
+            </Navigation>
           </ThemeProvider>
         </LoadingContextProvider>
       </RealmContextProvider>

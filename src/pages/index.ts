@@ -1,1 +1,2 @@
-export * from './GardenPage/GardenPage';
+export * from './CultivarsPage/CultivarsPage';
+export * from './ErrorPage/ErrorPage';
