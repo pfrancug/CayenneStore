@@ -2,7 +2,6 @@
   "extends": "@tsconfig/create-react-app/tsconfig.json",
   "compilerOptions": {
     "baseUrl": "src",
-    "moduleResolution": "Node16",
     "target": "ES6"
   },
   "include": ["src/**/*"],
