@@ -2,12 +2,22 @@
   "name": "garden",
   "version": "0.1.0",
   "private": true,
+  "description": "Create your own digital herbarium for chili peppers.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pfrancug/CayenneStore.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Piotr Francug",
+    "url": "https://linkedin.com/in/pfrancug"
+  },
   "scripts": {
     "build": "rimraf build && react-scripts build",
     "codegen": "graphql-codegen --config codegen.yml",
-    "eject": "react-scripts eject",
-    "format": "prettier --write \"./src/**/*.{ts,tsx}\"",
-    "lint": "eslint \"./src/**/*.{ts,tsx}\"",
+    "format": "prettier --write './**/*.{ts,tsx,md,json}'",
+    "lint": "eslint './src/**/*.{ts,tsx}'",
+    "lint:fix": "eslint --fix",
     "prepare": "husky install",
     "start": "react-scripts start"
   },
@@ -42,13 +52,13 @@
     "@graphql-codegen/typescript": "^2.7.3",
     "@graphql-codegen/typescript-operations": "^2.5.3",
     "@graphql-codegen/typescript-react-apollo": "^3.3.3",
-    "@types/graphql": "^14.5.0",
+    "@tsconfig/create-react-app": "^1.0.2",
     "@types/node": "^18.8.3",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.39.0",
     "@typescript-eslint/parser": "^5.39.0",
-    "eslint": "^8.23.1",
+    "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "graphql": "^16.6.0",
@@ -57,5 +67,13 @@
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
     "typescript": "^4.8.4"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "overrides": {
+    "nth-check": "^2.1.1",
+    "svgo": "^2.8.0"
   }
 }
