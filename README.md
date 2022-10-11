@@ -6,7 +6,6 @@ Create your own digital herbarium for chili peppers 🌶️
 
 - item removal option for logged user
 - wrap login form with `react-hook-form`
-- `seeds` page
 - `plants` page
 - regisration for new users
 - theme configuration

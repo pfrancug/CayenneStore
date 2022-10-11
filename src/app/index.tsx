@@ -6,19 +6,15 @@ import '@fontsource/roboto/700.css';
 import { ApolloProvider } from '@apollo/client';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { FC } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { App } from 'realm-web';
 
 import { theme } from './styles';
 import { client } from 'apollo';
 import { realmConfig } from 'configs';
-import { LoadingContextProvider, RealmContextProvider } from 'contexts';
 import { Navigation } from 'containers';
-import { CultivarsPage, ErrorPage } from 'pages';
-
-const router = createBrowserRouter([
-  { path: '/', element: <CultivarsPage />, errorElement: <ErrorPage /> },
-]);
+import { LoadingContextProvider, RealmContextProvider } from 'contexts';
+import { CultivarsPage, ErrorPage, SeedsPage } from 'pages';
 
 export const AppWrapper: FC = () => {
   const app = new App({
@@ -32,9 +28,15 @@ export const AppWrapper: FC = () => {
         <LoadingContextProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Navigation>
-              <RouterProvider router={router} />
-            </Navigation>
+            <BrowserRouter>
+              <Navigation />
+              <Routes>
+                <Route path="/" element={<CultivarsPage />} />
+                <Route path="/seeds" element={<SeedsPage />} />
+                <Route path="/404" element={<ErrorPage />} />
+                <Route path="*" element={<Navigate to="/404" replace />} />
+              </Routes>
+            </BrowserRouter>
           </ThemeProvider>
         </LoadingContextProvider>
       </RealmContextProvider>

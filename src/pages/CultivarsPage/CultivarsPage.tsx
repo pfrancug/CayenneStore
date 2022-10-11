@@ -15,7 +15,7 @@ import {
   containerStyle,
   tableHeaderStyle,
 } from './styles';
-import { AddCultivar, ErrorAlert } from 'components';
+import { ErrorAlert, InputForm, InputFormType } from 'components';
 import { useLoadingContext, useRealmContext } from 'contexts';
 import { useGetCultivars } from 'gql';
 import { Maybe } from 'schemas';
@@ -80,7 +80,7 @@ export const CultivarsPage: FC = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {cultivars.map(
+              {sortedCultivars.map(
                 ({ _id, cultivar, origin, scoville_scale, species }) => (
                   <TableRow key={_id as string}>
                     <TableCell
@@ -115,7 +115,7 @@ export const CultivarsPage: FC = () => {
           </Table>
         </TableContainer>
         {currentUser?.providerType === ProviderTypes.LocalUserpass ? (
-          <AddCultivar />
+          <InputForm type={InputFormType.Cultivar} />
         ) : null}
       </>
     );

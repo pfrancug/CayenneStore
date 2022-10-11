@@ -1,23 +1,38 @@
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
 import {
   AppBar,
   Container,
   LinearProgress,
   Toolbar,
   Typography,
+  Box,
+  Button,
 } from '@mui/material';
 
-import { cayenneStyle, storeStyle } from './styles';
+import {
+  buttonsBoxStyle,
+  cayenneStyle,
+  pageButtonStyle,
+  storeStyle,
+} from './styles';
 import { AppName } from 'utils/constants';
 import { LoginButton } from 'components';
 import { useLoadingContext } from 'contexts';
+import { Link } from 'react-router-dom';
 
-interface NavigationProps {
-  children: ReactNode;
-}
-
-export const Navigation: FC<NavigationProps> = ({ children }) => {
+export const Navigation: FC = () => {
   const { isLoading } = useLoadingContext();
+
+  interface PageProps {
+    page: string;
+    link: string;
+  }
+
+  const pages: Array<PageProps> = [
+    { page: 'Cultivars', link: '/' },
+    { page: 'Seeds', link: '/seeds' },
+  ];
+
   return (
     <>
       <AppBar position="static">
@@ -29,6 +44,13 @@ export const Navigation: FC<NavigationProps> = ({ children }) => {
             <Typography sx={storeStyle} variant="h4">
               {AppName.Store}
             </Typography>
+            <Box sx={buttonsBoxStyle}>
+              {pages.map(({ link, page }) => (
+                <Link key={page} to={link} style={{ textDecoration: 'none' }}>
+                  <Button sx={pageButtonStyle}>{page}</Button>
+                </Link>
+              ))}
+            </Box>
             <LoginButton />
           </Toolbar>
         </Container>
@@ -37,7 +59,6 @@ export const Navigation: FC<NavigationProps> = ({ children }) => {
         color="success"
         sx={{ visibility: isLoading ? 'visible' : 'hidden' }}
       />
-      <Container maxWidth="lg">{children}</Container>
     </>
   );
 };
