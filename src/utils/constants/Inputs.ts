@@ -98,23 +98,39 @@ export const AddCultivarInputs: Array<AddInputs> = [
 ];
 
 export const AddSeedInputs: Array<AddInputs> = [
-  { id: SeedProps.ID, inputType: inputTypes.Number, label: Peppers.ID },
+  {
+    id: SeedProps.ID,
+    inputType: inputTypes.Number,
+    label: Peppers.ID,
+  },
   {
     id: SeedProps.Cultivar,
     inputType: inputTypes.Text,
     label: Peppers.Cultivar,
   },
-  { id: SeedProps.Date, inputType: inputTypes.Text, label: Peppers.Date },
+  {
+    id: SeedProps.Date,
+    inputType: inputTypes.Text,
+    label: Peppers.Date,
+  },
   {
     id: SeedProps.Source,
     inputType: inputTypes.Text,
     label: Peppers.Source,
   },
-  { id: SeedProps.Details, inputType: inputTypes.Text, label: Peppers.Details },
+  {
+    id: SeedProps.Details,
+    inputType: inputTypes.Text,
+    label: Peppers.Details,
+  },
   {
     id: SeedProps.ParentSeed,
     inputType: inputTypes.Number,
     label: Peppers.ParentSeed,
   },
-  { id: SeedProps.Image, inputType: inputTypes.File, label: Peppers.PodPhoto },
+  {
+    id: SeedProps.Image,
+    inputType: inputTypes.File,
+    label: Peppers.PodPhoto,
+  },
 ];
