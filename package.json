@@ -51,7 +51,7 @@
     "@graphql-codegen/cli": "^2.13.5",
     "@graphql-codegen/typescript": "^2.7.3",
     "@graphql-codegen/typescript-operations": "^2.5.3",
-    "@graphql-codegen/typescript-react-apollo": "^3.3.3",
+    "@graphql-codegen/typescript-react-apollo": "^3.3.4",
     "@tsconfig/create-react-app": "^1.0.2",
     "@types/node": "^18.8.4",
     "@types/react": "^18.0.21",
