@@ -8,6 +8,6 @@ mv ./build ../garden-backend/hosting/files
 (
     cd ../garden-backend
     git add .
-    git commit -m $1
+    git commit -m "$1"
     git push
 )
