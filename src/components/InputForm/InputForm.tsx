@@ -20,13 +20,8 @@ import { ErrorAlert } from 'components';
 import { useLoadingContext, useRealmContext } from 'contexts';
 import { useAddCultivar, useAddSeed, useGetCultivars, useGetSeeds } from 'gql';
 import { onAddCultivarSubmit, onAddSeedSubmit } from 'helpers';
-import { InputTypes, Operations } from 'ts/enums';
+import { InputFormType, InputTypes, Operations } from 'ts/enums';
 import { AddCultivarInputs, AddSeedInputs } from 'utils/constants';
-
-export enum InputFormType {
-  Cultivar,
-  Seed,
-}
 
 interface InputFormProps {
   type: InputFormType;

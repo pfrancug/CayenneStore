@@ -20,19 +20,10 @@ import {
 import { LoginButton } from 'components';
 import { useLoadingContext } from 'contexts';
 import { AppName } from 'ts/enums';
+import { Pages } from 'utils/constants';
 
 export const Navigation: FC = () => {
   const { isLoading } = useLoadingContext();
-
-  interface PageProps {
-    page: string;
-    link: string;
-  }
-
-  const pages: Array<PageProps> = [
-    { page: 'Cultivars', link: '/' },
-    { page: 'Seeds', link: '/seeds' },
-  ];
 
   return (
     <>
@@ -42,11 +33,17 @@ export const Navigation: FC = () => {
             <Typography sx={cayenneStyle}>{AppName.Cayenne}</Typography>
             <Typography sx={storeStyle}>{AppName.Store}</Typography>
             <Box sx={buttonsBoxStyle}>
-              {pages.map(({ link, page }) => (
-                <Link key={page} style={linkStyle} to={link}>
-                  <Button sx={pageButtonStyle}>{page}</Button>
-                </Link>
-              ))}
+              {Pages.map(({ isMenuVisible, path, page }) => {
+                if (isMenuVisible) {
+                  return (
+                    <Link key={page} style={linkStyle} to={path}>
+                      <Button sx={pageButtonStyle}>{page}</Button>
+                    </Link>
+                  );
+                }
+
+                return null;
+              })}
             </Box>
             <LoginButton />
           </Toolbar>

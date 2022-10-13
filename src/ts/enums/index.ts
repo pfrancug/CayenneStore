@@ -1,6 +1,7 @@
 export * from './AppName';
 export * from './CultivarProps';
 export * from './Errors';
+export * from './InputFormType';
 export * from './InputTypes';
 export * from './Login';
 export * from './NotFound';

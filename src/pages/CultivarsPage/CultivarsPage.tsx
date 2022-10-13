@@ -15,11 +15,11 @@ import {
   containerStyle,
   tableHeaderStyle,
 } from 'common/table.styles';
-import { ErrorAlert, InputForm, InputFormType } from 'components';
+import { ErrorAlert, InputForm } from 'components';
 import { useLoadingContext, useRealmContext } from 'contexts';
 import { useGetCultivars } from 'gql';
 import { Maybe } from 'schemas';
-import { ProviderTypes } from 'ts/enums';
+import { InputFormType, ProviderTypes } from 'ts/enums';
 import { CultivarTableHeaders } from 'utils/constants';
 
 export const CultivarsPage: FC = () => {
