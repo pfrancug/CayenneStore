@@ -3,7 +3,7 @@ import { FC, useState } from 'react';
 
 import { LoginDialog } from 'components';
 import { useRealmContext } from 'contexts';
-import { Login, ProviderTypes } from 'utils/constants';
+import { Login, ProviderTypes } from 'ts/enums';
 
 export const LoginButton: FC = () => {
   const { app, currentUser, setCurrentUser } = useRealmContext();

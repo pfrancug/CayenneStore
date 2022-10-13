@@ -18,7 +18,8 @@ import {
 import { ErrorAlert, InputForm, InputFormType, PodImage } from 'components';
 import { useLoadingContext, useRealmContext } from 'contexts';
 import { useGetSeeds } from 'gql';
-import { ProviderTypes, SeedTableHeaders } from 'utils/constants';
+import { ProviderTypes } from 'ts/enums';
+import { SeedTableHeaders } from 'utils/constants';
 
 export const SeedsPage: FC = () => {
   const { data, error, loading, refetch } = useGetSeeds();

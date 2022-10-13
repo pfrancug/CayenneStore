@@ -6,15 +6,15 @@ import '@fontsource/roboto/700.css';
 import { ApolloProvider } from '@apollo/client';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { FC } from 'react';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { App } from 'realm-web';
 
 import { theme } from './styles';
 import { client } from 'apollo';
 import { realmConfig } from 'configs';
 import { Navigation } from 'containers';
+import { Pages } from 'utils/constants';
 import { LoadingContextProvider, RealmContextProvider } from 'contexts';
-import { CultivarsPage, ErrorPage, SeedsPage } from 'pages';
 
 export const AppWrapper: FC = () => {
   const app = new App({
@@ -31,10 +31,9 @@ export const AppWrapper: FC = () => {
             <BrowserRouter>
               <Navigation />
               <Routes>
-                <Route path="/" element={<CultivarsPage />} />
-                <Route path="/seeds" element={<SeedsPage />} />
-                <Route path="/404" element={<ErrorPage />} />
-                <Route path="*" element={<Navigate to="/404" replace />} />
+                {Pages.map(({ page, path, element }) => (
+                  <Route key={page} path={path} element={element} />
+                ))}
               </Routes>
             </BrowserRouter>
           </ThemeProvider>

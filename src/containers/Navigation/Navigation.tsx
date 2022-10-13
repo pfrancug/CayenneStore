@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import {
   AppBar,
   Container,
@@ -8,6 +7,8 @@ import {
   Box,
   Button,
 } from '@mui/material';
+import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   buttonsBoxStyle,
@@ -15,10 +16,9 @@ import {
   pageButtonStyle,
   storeStyle,
 } from './styles';
-import { AppName } from 'utils/constants';
 import { LoginButton } from 'components';
 import { useLoadingContext } from 'contexts';
-import { Link } from 'react-router-dom';
+import { AppName } from 'ts/enums';
 
 export const Navigation: FC = () => {
   const { isLoading } = useLoadingContext();

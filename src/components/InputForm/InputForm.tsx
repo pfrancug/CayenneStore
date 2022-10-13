@@ -7,8 +7,7 @@ import {
   TextField,
   Unstable_Grid2,
 } from '@mui/material';
-import Resizer from 'react-image-file-resizer';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, FieldValues, useForm } from 'react-hook-form';
 
 import {
   containerStyle,
@@ -20,13 +19,9 @@ import {
 import { ErrorAlert } from 'components';
 import { useLoadingContext, useRealmContext } from 'contexts';
 import { useAddCultivar, useAddSeed, useGetCultivars, useGetSeeds } from 'gql';
-import { CultivarInsertInput, SeedInsertInput } from 'schemas';
-import {
-  AddCultivarInputs,
-  AddSeedInputs,
-  inputTypes,
-  Operations,
-} from 'utils/constants';
+import { onAddCultivarSubmit, onAddSeedSubmit } from 'helpers';
+import { InputTypes, Operations } from 'ts/enums';
+import { AddCultivarInputs, AddSeedInputs } from 'utils/constants';
 
 export enum InputFormType {
   Cultivar,
@@ -59,88 +54,22 @@ export const InputForm: FC<InputFormProps> = ({ type }) => {
       cRefetch();
       reset();
     }
+  }, [acData, cRefetch, reset, type]);
 
+  useEffect(() => {
     if (type === InputFormType.Seed && asData) {
       sRefetch();
       reset();
     }
-  }, [acData, asData, cRefetch, reset, sRefetch, type]);
+  }, [asData, reset, sRefetch, type]);
 
-  const resizeFile = (file: File) =>
-    new Promise((resolve) => {
-      Resizer.imageFileResizer(
-        file,
-        1024,
-        1024,
-        'JPEG',
-        100,
-        0,
-        (uri) => {
-          resolve(uri);
-        },
-        'base64',
-      );
-    });
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- TODO: Add proper typing.
-  const onAddCultivarSubmit = (data: any) => {
-    const date = new Date();
-
-    insertOneCultivar({
-      variables: {
-        data: {
-          creation_date: date,
-          cultivar: data.cultivar.length ? data.cultivar.trim() : null,
-          last_update_date: date,
-          origin: data.origin.length ? data.origin.trim() : null,
-          owner_id: currentUser?.id ?? null,
-          scoville_scale: {
-            from: data.heatFrom.length ? data.heatFrom : null,
-            to: data.heatTo.length ? data.heatTo : null,
-          },
-          species: data.species.length ? data.species.trim() : null,
-        } as CultivarInsertInput,
-      },
-    });
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- TODO: Add proper typing.
-  const onAddSeedSubmit = async (data: any) => {
-    const date = new Date();
-    const file = data.image[0];
-    let image = null;
-
-    if (file) {
-      try {
-        image = (await resizeFile(file)) as string;
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    insertOneSeed({
-      variables: {
-        data: {
-          creation_date: date,
-          cultivar: data.cultivar.length ? data.cultivar.trim() : null,
-          id: data.id.trim().length ? data.id.trim() : null,
-          image,
-          last_update_date: date,
-          owner_id: currentUser?.id ?? null,
-          parent: data.parent.trim().length ? data.parent.trim() : null,
-          source: data.source.trim().length ? data.source.trim() : null,
-        } as SeedInsertInput,
-      },
-    });
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- TODO: Add proper typing.
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: FieldValues) => {
     if (type === InputFormType.Cultivar) {
-      onAddCultivarSubmit(data);
+      onAddCultivarSubmit(data, insertOneCultivar, currentUser);
     }
+
     if (type === InputFormType.Seed) {
-      onAddSeedSubmit(data);
+      onAddSeedSubmit(data, insertOneSeed, currentUser);
     }
   };
 
@@ -169,7 +98,7 @@ export const InputForm: FC<InputFormProps> = ({ type }) => {
       >
         {inputs?.map(({ endAdornment, id, inputType, label }) => (
           <Unstable_Grid2 key={label} sm={6} xs={12}>
-            {inputType === inputTypes.File ? (
+            {inputType === InputTypes.File ? (
               <Button
                 color="success"
                 component="label"
@@ -177,13 +106,7 @@ export const InputForm: FC<InputFormProps> = ({ type }) => {
                 sx={inputStyle}
               >
                 {label}
-                <input
-                  {...register(id)}
-                  hidden
-                  accept="image/*"
-                  // onChange={changeHandler}
-                  type="file"
-                />
+                <input {...register(id)} hidden accept="image/*" type="file" />
               </Button>
             ) : (
               <Controller

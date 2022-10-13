@@ -19,7 +19,8 @@ import { ErrorAlert, InputForm, InputFormType } from 'components';
 import { useLoadingContext, useRealmContext } from 'contexts';
 import { useGetCultivars } from 'gql';
 import { Maybe } from 'schemas';
-import { CultivarTableHeaders, ProviderTypes } from 'utils/constants';
+import { ProviderTypes } from 'ts/enums';
+import { CultivarTableHeaders } from 'utils/constants';
 
 export const CultivarsPage: FC = () => {
   const { data, error, loading, refetch } = useGetCultivars();

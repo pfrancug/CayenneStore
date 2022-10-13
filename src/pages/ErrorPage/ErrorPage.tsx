@@ -10,7 +10,7 @@ import {
   subtitleStyle,
   titleStyle,
 } from './styles';
-import { NotFound } from 'utils/constants';
+import { NotFound } from 'ts/enums';
 
 export const ErrorPage: FC = () => (
   <Box sx={boxStyle}>
