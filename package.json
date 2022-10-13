@@ -41,6 +41,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.37.0",
+    "react-image-file-resizer": "^0.4.8",
     "react-router-dom": "^6.4.2",
     "react-scripts": "^5.0.1",
     "realm-web": "^1.7.1"
@@ -48,8 +49,8 @@
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
     "@graphql-codegen/add": "^3.2.1",
-    "@graphql-codegen/cli": "^2.13.6",
-    "@graphql-codegen/typescript": "^2.7.3",
+    "@graphql-codegen/cli": "^2.13.7",
+    "@graphql-codegen/typescript": "^2.7.4",
     "@graphql-codegen/typescript-operations": "^2.5.4",
     "@graphql-codegen/typescript-react-apollo": "^3.3.4",
     "@tsconfig/create-react-app": "^1.0.2",

@@ -1,34 +1,50 @@
-import { FC, ReactNode } from 'react';
 import {
   AppBar,
+  Box,
+  Button,
   Container,
   LinearProgress,
   Toolbar,
   Typography,
 } from '@mui/material';
+import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
-import { cayenneStyle, storeStyle } from './styles';
-import { AppName } from 'utils/constants';
+import {
+  buttonsBoxStyle,
+  cayenneStyle,
+  linkStyle,
+  pageButtonStyle,
+  storeStyle,
+} from './styles';
 import { LoginButton } from 'components';
 import { useLoadingContext } from 'contexts';
+import { AppName } from 'ts/enums';
+import { Pages } from 'utils/constants';
 
-interface NavigationProps {
-  children: ReactNode;
-}
-
-export const Navigation: FC<NavigationProps> = ({ children }) => {
+export const Navigation: FC = () => {
   const { isLoading } = useLoadingContext();
+
   return (
     <>
       <AppBar position="static">
         <Container maxWidth="lg">
           <Toolbar>
-            <Typography sx={cayenneStyle} variant="h4">
-              {AppName.Cayenne}
-            </Typography>
-            <Typography sx={storeStyle} variant="h4">
-              {AppName.Store}
-            </Typography>
+            <Typography sx={cayenneStyle}>{AppName.Cayenne}</Typography>
+            <Typography sx={storeStyle}>{AppName.Store}</Typography>
+            <Box sx={buttonsBoxStyle}>
+              {Pages.map(({ isMenuVisible, path, page }) => {
+                if (isMenuVisible) {
+                  return (
+                    <Link key={page} style={linkStyle} to={path}>
+                      <Button sx={pageButtonStyle}>{page}</Button>
+                    </Link>
+                  );
+                }
+
+                return null;
+              })}
+            </Box>
             <LoginButton />
           </Toolbar>
         </Container>
@@ -37,7 +53,6 @@ export const Navigation: FC<NavigationProps> = ({ children }) => {
         color="success"
         sx={{ visibility: isLoading ? 'visible' : 'hidden' }}
       />
-      <Container maxWidth="lg">{children}</Container>
     </>
   );
 };

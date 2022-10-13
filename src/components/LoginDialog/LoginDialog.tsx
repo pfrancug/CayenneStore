@@ -11,7 +11,7 @@ import { Credentials, MongoDBRealmError } from 'realm-web';
 
 import { alertStyle, inputStyle, submitStyle } from './styles';
 import { useRealmContext } from 'contexts';
-import { Errors, Login } from 'utils/constants';
+import { Errors, Login } from 'ts/enums';
 
 interface LoginModalProps {
   isModalOpen: boolean;

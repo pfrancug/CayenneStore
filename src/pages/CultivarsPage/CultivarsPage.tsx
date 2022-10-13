@@ -14,12 +14,13 @@ import {
   columnHeaderStyle,
   containerStyle,
   tableHeaderStyle,
-} from './styles';
-import { AddCultivar, ErrorAlert } from 'components';
+} from 'common/table.styles';
+import { ErrorAlert, InputForm } from 'components';
 import { useLoadingContext, useRealmContext } from 'contexts';
 import { useGetCultivars } from 'gql';
 import { Maybe } from 'schemas';
-import { CultivarTableHeaders, ProviderTypes } from 'utils/constants';
+import { InputFormType, ProviderTypes } from 'ts/enums';
+import { CultivarTableHeaders } from 'utils/constants';
 
 export const CultivarsPage: FC = () => {
   const { data, error, loading, refetch } = useGetCultivars();
@@ -80,7 +81,7 @@ export const CultivarsPage: FC = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {cultivars.map(
+              {sortedCultivars.map(
                 ({ _id, cultivar, origin, scoville_scale, species }) => (
                   <TableRow key={_id as string}>
                     <TableCell
@@ -115,7 +116,7 @@ export const CultivarsPage: FC = () => {
           </Table>
         </TableContainer>
         {currentUser?.providerType === ProviderTypes.LocalUserpass ? (
-          <AddCultivar />
+          <InputForm type={InputFormType.Cultivar} />
         ) : null}
       </>
     );

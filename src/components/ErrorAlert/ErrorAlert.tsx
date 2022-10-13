@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Alert, AlertTitle } from '@mui/material';
 
-import { Errors } from 'utils/constants';
+import { Errors } from 'ts/enums';
 
 interface ErrorAlertProps {
   maxWidth?: number;
@@ -9,7 +9,7 @@ interface ErrorAlertProps {
 }
 
 export const ErrorAlert: FC<ErrorAlertProps> = ({ maxWidth, message }) => (
-  <Alert severity="error" sx={{ maxWidth, mx: 'auto', mb: 3 }}>
+  <Alert severity="error" sx={{ maxWidth, mb: 3, mx: 'auto' }}>
     <AlertTitle>{Errors.Error}</AlertTitle>
     {message}
   </Alert>
