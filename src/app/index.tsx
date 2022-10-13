@@ -31,8 +31,8 @@ export const AppWrapper: FC = () => {
             <BrowserRouter>
               <Navigation />
               <Routes>
-                {Pages.map(({ page, path, element }) => (
-                  <Route key={page} path={path} element={element} />
+                {Pages.map(({ element, page, path }) => (
+                  <Route element={element} key={page} path={path} />
                 ))}
               </Routes>
             </BrowserRouter>
