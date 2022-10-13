@@ -93,7 +93,7 @@ export const CultivarsPage: FC = () => {
                     </TableCell>
                     <TableCell sx={cellStyle}>{species}</TableCell>
                     {scoville_scale?.from === null ? (
-                      <TableCell colSpan={2} sx={cellStyle}>
+                      <TableCell align="center" colSpan={2} sx={cellStyle}>
                         {localiseValue(scoville_scale?.to)}
                       </TableCell>
                     ) : (

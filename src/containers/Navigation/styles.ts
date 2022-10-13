@@ -22,8 +22,8 @@ export const storeStyle: SxProps<Theme> = ({
 });
 
 export const buttonsBoxStyle: SxProps<Theme> = ({ breakpoints }) => ({
-  flexGrow: 1,
   display: 'flex',
+  flexGrow: 1,
 
   [breakpoints.down('sm')]: {
     display: 'none',
