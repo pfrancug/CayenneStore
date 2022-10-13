@@ -14,7 +14,7 @@ import {
   columnHeaderStyle,
   containerStyle,
   tableHeaderStyle,
-} from './styles';
+} from 'common/table.styles';
 import { ErrorAlert, InputForm, InputFormType } from 'components';
 import { useLoadingContext, useRealmContext } from 'contexts';
 import { useGetCultivars } from 'gql';
@@ -93,7 +93,7 @@ export const CultivarsPage: FC = () => {
                     </TableCell>
                     <TableCell sx={cellStyle}>{species}</TableCell>
                     {scoville_scale?.from === null ? (
-                      <TableCell align="center" colSpan={2} sx={cellStyle}>
+                      <TableCell colSpan={2} sx={cellStyle}>
                         {localiseValue(scoville_scale?.to)}
                       </TableCell>
                     ) : (

@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 import {
   buttonsBoxStyle,
   cayenneStyle,
+  linkStyle,
   pageButtonStyle,
   storeStyle,
 } from './styles';
@@ -38,15 +39,11 @@ export const Navigation: FC = () => {
       <AppBar position="static">
         <Container maxWidth="lg">
           <Toolbar>
-            <Typography sx={cayenneStyle} variant="h4">
-              {AppName.Cayenne}
-            </Typography>
-            <Typography sx={storeStyle} variant="h4">
-              {AppName.Store}
-            </Typography>
+            <Typography sx={cayenneStyle}>{AppName.Cayenne}</Typography>
+            <Typography sx={storeStyle}>{AppName.Store}</Typography>
             <Box sx={buttonsBoxStyle}>
               {pages.map(({ link, page }) => (
-                <Link key={page} to={link} style={{ textDecoration: 'none' }}>
+                <Link key={page} style={linkStyle} to={link}>
                   <Button sx={pageButtonStyle}>{page}</Button>
                 </Link>
               ))}

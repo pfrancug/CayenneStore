@@ -14,11 +14,12 @@ import {
   columnHeaderStyle,
   containerStyle,
   tableHeaderStyle,
-} from './styles';
+} from 'common/table.styles';
 import { ErrorAlert, InputForm, InputFormType, PodImage } from 'components';
 import { useLoadingContext, useRealmContext } from 'contexts';
 import { useGetSeeds } from 'gql';
 import { ProviderTypes } from 'ts/enums';
+import { formatDate } from 'utils';
 import { SeedTableHeaders } from 'utils/constants';
 
 export const SeedsPage: FC = () => {
@@ -49,20 +50,6 @@ export const SeedsPage: FC = () => {
   if (loading || !seeds) {
     return null;
   }
-
-  const formatDate = (date: unknown) => {
-    const padTo2Digits = (num: number) => num.toString().padStart(2, '0');
-
-    if (typeof date === 'string') {
-      const newDate = new Date(date);
-      const month = padTo2Digits(newDate.getMonth() + 1);
-      const year = newDate.getFullYear();
-
-      return [month, year].join('.');
-    }
-
-    return null;
-  };
 
   if (sortedSeeds) {
     return (

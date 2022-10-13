@@ -6,6 +6,7 @@ export const logoStyle: SxProps<Theme> = ({ palette }) => ({
 
 export const cayenneStyle: SxProps<Theme> = ({ palette, typography }) => ({
   color: palette.error.dark,
+  fontSize: typography.h4,
   fontWeight: typography.fontWeightMedium,
 });
 
@@ -15,6 +16,7 @@ export const storeStyle: SxProps<Theme> = ({
   typography,
 }) => ({
   color: palette.common.white,
+  fontSize: typography.h4,
   fontWeight: typography.fontWeightLight,
   marginRight: spacing(4),
 });
@@ -33,3 +35,7 @@ export const pageButtonStyle: SxProps<Theme> = ({ palette, spacing }) => ({
   marginRight: spacing(1),
   padding: 0,
 });
+
+export const linkStyle = {
+  textDecoration: 'none',
+};

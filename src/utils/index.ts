@@ -1,2 +1,3 @@
-export * from './inpuValidation';
+export * from './formatDate';
+export * from './inputValidation';
 export * from './resizeFile';

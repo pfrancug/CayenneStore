@@ -11,7 +11,11 @@ export const containerStyle: SxProps<Theme> = ({ breakpoints, spacing }) => ({
   },
 });
 
-export const tableHeaderStyle: SxProps<Theme> = ({ palette, typography }) => ({
+export const tableHeaderStyle: SxProps<Theme> = ({
+  palette,
+  typography,
+  zIndex,
+}) => ({
   background: palette.primary.dark,
   borderColor: palette.common.black,
   color: palette.text.primary,
@@ -21,7 +25,7 @@ export const tableHeaderStyle: SxProps<Theme> = ({ palette, typography }) => ({
   ':first-of-type': {
     left: 0,
     position: 'sticky',
-    zIndex: 3,
+    zIndex: zIndex.tooltip,
   },
 });
 
