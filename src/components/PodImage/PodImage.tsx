@@ -1,8 +1,7 @@
 import { FC, useEffect, useState } from 'react';
-import { IconButton, ImageListItem, ImageListItemBar } from '@mui/material';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import { ImageListItem, Link } from '@mui/material';
 
-import { ImageBarStyle, iconButtonStyle, imageStyle } from './styles';
+import { imageStyle } from './styles';
 import { Maybe } from 'schemas';
 
 interface PodImageProps {
@@ -25,24 +24,11 @@ export const PodImage: FC<PodImageProps> = ({ binData, name }) => {
 
   if (image && name) {
     return (
-      <ImageListItem key={image} sx={imageStyle}>
-        <img alt={name} loading="lazy" src={image} />
-        <ImageListItemBar
-          actionIcon={
-            <IconButton
-              href={image}
-              size="small"
-              sx={iconButtonStyle}
-              target="_blank"
-            >
-              <OpenInNewIcon fontSize="inherit" />
-            </IconButton>
-          }
-          actionPosition="right"
-          position="top"
-          sx={ImageBarStyle}
-        />
-      </ImageListItem>
+      <Link href={image} target="_blank">
+        <ImageListItem key={image} sx={imageStyle}>
+          <img alt={name} src={image} />
+        </ImageListItem>
+      </Link>
     );
   }
 
