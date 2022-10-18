@@ -7,12 +7,3 @@ export const imageStyle: SxProps<Theme> = () => ({
   overflow: 'hidden',
   width: 150,
 });
-
-export const iconButtonStyle: SxProps<Theme> = ({ palette, spacing }) => ({
-  color: palette.primary.dark,
-  margin: spacing(1),
-});
-
-export const ImageBarStyle: SxProps<Theme> = ({ palette, spacing }) => ({
-  background: 'transparent',
-});
