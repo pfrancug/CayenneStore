@@ -38,89 +38,84 @@ export const CultivarsPage: FC = () => {
   }, [currentUser?.id, refetch]);
 
   const { cultivars } = data ?? {};
-  const sortedCultivars = useMemo(
-    () =>
-      cultivars?.sort((a, b) => {
-        if (a.cultivar && b.cultivar) {
-          return a.cultivar.localeCompare(b.cultivar);
-        }
 
-        return 0;
-      }),
-    [cultivars],
-  );
+  const sortedCultivars = useMemo(() => {
+    if (!cultivars || cultivars.length === 0) {
+      return null;
+    }
+
+    return [...cultivars].sort((a, b) => {
+      if (a.cultivar && b.cultivar) {
+        return a.cultivar.localeCompare(b.cultivar);
+      }
+
+      return 0;
+    });
+  }, [cultivars]);
 
   if (error) {
     return <ErrorAlert message={error.message} />;
   }
 
-  if (loading || !cultivars) {
+  if (loading || !sortedCultivars) {
     return null;
   }
 
   const localiseValue = (value?: Maybe<number>) =>
     value ? value.toLocaleString('en-US') : null;
 
-  if (sortedCultivars) {
-    return (
-      <>
-        <TableContainer component={Paper} sx={containerStyle}>
-          <Table stickyHeader size="small">
-            <TableHead>
-              <TableRow>
-                {CultivarTableHeaders.map(({ colSpan, label }) => (
-                  <TableCell
-                    align="center"
-                    colSpan={colSpan}
-                    key={label}
-                    sx={tableHeaderStyle}
-                  >
-                    {label}
+  return (
+    <>
+      <TableContainer component={Paper} sx={containerStyle}>
+        <Table stickyHeader size="small">
+          <TableHead>
+            <TableRow>
+              {CultivarTableHeaders.map(({ colSpan, label }) => (
+                <TableCell
+                  align="center"
+                  colSpan={colSpan}
+                  key={label}
+                  sx={tableHeaderStyle}
+                >
+                  {label}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {sortedCultivars.map(
+              ({ _id, cultivar, origin, scoville_scale, species }) => (
+                <TableRow key={_id as string}>
+                  <TableCell component="th" scope="row" sx={columnHeaderStyle}>
+                    {cultivar}
                   </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {sortedCultivars.map(
-                ({ _id, cultivar, origin, scoville_scale, species }) => (
-                  <TableRow key={_id as string}>
-                    <TableCell
-                      component="th"
-                      scope="row"
-                      sx={columnHeaderStyle}
-                    >
-                      {cultivar}
+                  <TableCell sx={cellStyle}>{species}</TableCell>
+                  {scoville_scale?.from === null ? (
+                    <TableCell align="center" colSpan={2} sx={cellStyle}>
+                      {localiseValue(scoville_scale?.to)}
                     </TableCell>
-                    <TableCell sx={cellStyle}>{species}</TableCell>
-                    {scoville_scale?.from === null ? (
-                      <TableCell align="center" colSpan={2} sx={cellStyle}>
+                  ) : (
+                    <>
+                      <TableCell align="center" sx={cellStyle}>
+                        {localiseValue(scoville_scale?.from)}
+                      </TableCell>
+                      <TableCell align="center" sx={cellStyle}>
                         {localiseValue(scoville_scale?.to)}
                       </TableCell>
-                    ) : (
-                      <>
-                        <TableCell align="center" sx={cellStyle}>
-                          {localiseValue(scoville_scale?.from)}
-                        </TableCell>
-                        <TableCell align="center" sx={cellStyle}>
-                          {localiseValue(scoville_scale?.to)}
-                        </TableCell>
-                      </>
-                    )}
-                    <TableCell align="center" sx={cellStyle}>
-                      {origin}
-                    </TableCell>
-                  </TableRow>
-                ),
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        {currentUser?.providerType === ProviderTypes.LocalUserpass ? (
-          <InputForm type={InputFormType.Cultivar} />
-        ) : null}
-      </>
-    );
-  }
-
-  return null;
+                    </>
+                  )}
+                  <TableCell align="center" sx={cellStyle}>
+                    {origin}
+                  </TableCell>
+                </TableRow>
+              ),
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      {currentUser?.providerType === ProviderTypes.LocalUserpass ? (
+        <InputForm type={InputFormType.Cultivar} />
+      ) : null}
+    </>
+  );
 };
