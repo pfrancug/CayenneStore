@@ -44,7 +44,7 @@
     "react-image-file-resizer": "^0.4.8",
     "react-router-dom": "^6.4.2",
     "react-scripts": "^5.0.1",
-    "realm-web": "^1.7.1"
+    "realm-web": "^2.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
