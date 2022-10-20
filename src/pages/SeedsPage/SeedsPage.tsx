@@ -38,82 +38,80 @@ export const SeedsPage: FC = () => {
   }, [currentUser?.id, refetch]);
 
   const { seeds } = data ?? {};
-  const sortedSeeds = useMemo(
-    () => seeds?.sort((a, b) => (a.id && b.id ? a.id - b.id : 0)),
-    [seeds],
-  );
+  const sortedSeeds = useMemo(() => {
+    if (!seeds || seeds.length === 0) {
+      return null;
+    }
+    return [...seeds].sort((a, b) => (a.id && b.id ? a.id - b.id : 0));
+  }, [seeds]);
 
   if (error) {
     return <ErrorAlert message={error.message} />;
   }
 
-  if (loading || !seeds) {
+  if (loading || !sortedSeeds) {
     return null;
   }
 
-  if (sortedSeeds) {
-    return (
-      <>
-        <TableContainer component={Paper} sx={containerStyle}>
-          <Table stickyHeader size="small">
-            <TableHead>
-              <TableRow>
-                {SeedTableHeaders.map(({ label }) => (
-                  <TableCell align="center" key={label} sx={tableHeaderStyle}>
-                    {label}
+  return (
+    <>
+      <TableContainer component={Paper} sx={containerStyle}>
+        <Table stickyHeader size="small">
+          <TableHead>
+            <TableRow>
+              {SeedTableHeaders.map(({ label }) => (
+                <TableCell align="center" key={label} sx={tableHeaderStyle}>
+                  {label}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {sortedSeeds.map(
+              ({
+                _id,
+                cultivar,
+                date,
+                details,
+                id,
+                image,
+                parent_seed,
+                source,
+              }) => (
+                <TableRow key={_id as string}>
+                  <TableCell
+                    align="center"
+                    component="th"
+                    scope="row"
+                    sx={columnHeaderStyle}
+                  >
+                    {id}
                   </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {sortedSeeds.map(
-                ({
-                  _id,
-                  cultivar,
-                  date,
-                  details,
-                  id,
-                  image,
-                  parent_seed,
-                  source,
-                }) => (
-                  <TableRow key={_id as string}>
-                    <TableCell
-                      align="center"
-                      component="th"
-                      scope="row"
-                      sx={columnHeaderStyle}
-                    >
-                      {id}
-                    </TableCell>
-                    <TableCell sx={cellStyle}>{cultivar}</TableCell>
-                    <TableCell align="center" sx={cellStyle}>
-                      {formatDate(date)}
-                    </TableCell>
-                    <TableCell align="center" sx={cellStyle}>
-                      {source}
-                    </TableCell>
-                    <TableCell align="center" sx={cellStyle}>
-                      {details}
-                    </TableCell>
-                    <TableCell align="center" sx={cellStyle}>
-                      {parent_seed}
-                    </TableCell>
-                    <TableCell align="center" sx={cellStyle}>
-                      <PodImage binData={image} name={cultivar} />
-                    </TableCell>
-                  </TableRow>
-                ),
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        {currentUser?.providerType === ProviderTypes.LocalUserpass ? (
-          <InputForm type={InputFormType.Seed} />
-        ) : null}
-      </>
-    );
-  }
-
-  return null;
+                  <TableCell sx={cellStyle}>{cultivar}</TableCell>
+                  <TableCell align="center" sx={cellStyle}>
+                    {formatDate(date)}
+                  </TableCell>
+                  <TableCell align="center" sx={cellStyle}>
+                    {source}
+                  </TableCell>
+                  <TableCell align="center" sx={cellStyle}>
+                    {details}
+                  </TableCell>
+                  <TableCell align="center" sx={cellStyle}>
+                    {parent_seed}
+                  </TableCell>
+                  <TableCell align="center" sx={cellStyle}>
+                    <PodImage binData={image} name={cultivar} />
+                  </TableCell>
+                </TableRow>
+              ),
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      {currentUser?.providerType === ProviderTypes.LocalUserpass ? (
+        <InputForm type={InputFormType.Seed} />
+      ) : null}
+    </>
+  );
 };
