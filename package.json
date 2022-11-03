@@ -35,7 +35,7 @@
     "@apollo/client": "^3.7.0",
     "@date-io/date-fns": "^2.16.0",
     "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
+    "@emotion/styled": "^11.10.5",
     "@fontsource/roboto": "4.5.8",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.10",
