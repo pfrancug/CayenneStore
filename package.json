@@ -32,7 +32,7 @@
     ]
   },
   "dependencies": {
-    "@apollo/client": "^3.7.0",
+    "@apollo/client": "^3.7.1",
     "@date-io/date-fns": "^2.16.0",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.5",
