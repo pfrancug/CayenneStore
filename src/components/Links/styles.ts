@@ -25,13 +25,9 @@ export const pageButtonStyle: SxProps<Theme> = ({
   color: palette.common.white,
 
   [breakpoints.down('sm')]: {
-    width: '100%',
     padding: spacing(1, 2),
     textAlign: 'left',
-
-    ':last-child': {
-      marginBottom: 0,
-    },
+    width: '100%',
   },
 
   [breakpoints.up('sm')]: {

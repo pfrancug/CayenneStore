@@ -15,14 +15,14 @@ import { FC, useState } from 'react';
 import { cayenneStyle, logoStyle, menuStyle, storeStyle } from './styles';
 import { Links, LoginPanel } from 'components';
 import { useLoadingContext } from 'contexts';
-import { useIsLocalUser, useIsUpSmBreakPoint } from 'hooks';
+import { useIsLocalUser, useIsUpSmBreakpoint } from 'hooks';
 import { AppName } from 'ts/enums';
 
 export const Navigation: FC = () => {
   const { isLoading } = useLoadingContext();
   const [isDrawerOpen, setIsDraweOpen] = useState(false);
   const isLocalUser = useIsLocalUser();
-  const isUpSmBreakpoint = useIsUpSmBreakPoint();
+  const isUpSmBreakpoint = useIsUpSmBreakpoint();
 
   const handleDrawerState = () => {
     setIsDraweOpen((prevState) => !prevState);
@@ -31,11 +31,11 @@ export const Navigation: FC = () => {
   const Icon: FC = () => {
     if (!isUpSmBreakpoint) {
       return <Menu />;
-    }
-    if (isLocalUser) {
+    } else if (isLocalUser) {
       return <Person />;
+    } else {
+      return <PersonOutline />;
     }
-    return <PersonOutline />;
   };
 
   return (
