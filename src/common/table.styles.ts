@@ -2,12 +2,16 @@ import { SxProps, Theme } from '@mui/material';
 
 export const containerStyle: SxProps<Theme> = ({ breakpoints, spacing }) => ({
   alignSelf: 'center',
-  margin: `${spacing(2)} auto`,
-  maxHeight: `calc(100vh - 96px)`,
+  margin: spacing(2, 'auto'),
   maxWidth: 700,
 
   [breakpoints.down('sm')]: {
     maxHeight: `calc(100vh - 88px)`,
+    width: `calc(100% - ${spacing(4)})`,
+  },
+
+  [breakpoints.up('sm')]: {
+    maxHeight: `calc(100vh - 96px)`,
   },
 });
 
@@ -25,7 +29,7 @@ export const tableHeaderStyle: SxProps<Theme> = ({
   ':first-of-type': {
     left: 0,
     position: 'sticky',
-    zIndex: zIndex.tooltip,
+    zIndex: zIndex.appBar,
   },
 });
 

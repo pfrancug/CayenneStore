@@ -1,5 +1,5 @@
-import { FC } from 'react';
 import { Alert, AlertTitle } from '@mui/material';
+import { FC } from 'react';
 
 import { Errors } from 'ts/enums';
 

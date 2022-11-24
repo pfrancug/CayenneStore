@@ -9,3 +9,4 @@ export * from './Operations';
 export * from './Peppers';
 export * from './ProviderTypes';
 export * from './SeedProps';
+export * from './Styles';

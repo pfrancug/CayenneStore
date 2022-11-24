@@ -1,5 +1,5 @@
-import { FC, useEffect, useState } from 'react';
 import { ImageListItem, Link } from '@mui/material';
+import { FC, useEffect, useState } from 'react';
 
 import { imageStyle } from './styles';
 import { Maybe } from 'schemas';

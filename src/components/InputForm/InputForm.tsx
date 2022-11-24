@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-pascal-case -- MUI feature */
-import { FC, useEffect } from 'react';
 import {
   Button,
   Container,
@@ -7,6 +6,7 @@ import {
   TextField,
   Unstable_Grid2,
 } from '@mui/material';
+import { FC, useEffect } from 'react';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
 
 import {
@@ -28,17 +28,17 @@ interface InputFormProps {
 }
 
 export const InputForm: FC<InputFormProps> = ({ type }) => {
+  const { loading: cLoading, refetch: cRefetch } = useGetCultivars();
+  const { loading: sLoading, refetch: sRefetch } = useGetSeeds();
+  const { control, register, handleSubmit, reset } = useForm();
+  const { setIsLoading } = useLoadingContext();
+  const { currentUser } = useRealmContext();
   const [
     insertOneCultivar,
     { data: acData, error: acError, loading: acLoading },
   ] = useAddCultivar();
   const [insertOneSeed, { data: asData, error: asError, loading: asLoading }] =
     useAddSeed();
-  const { loading: cLoading, refetch: cRefetch } = useGetCultivars();
-  const { loading: sLoading, refetch: sRefetch } = useGetSeeds();
-  const { control, register, handleSubmit, reset } = useForm();
-  const { setIsLoading } = useLoadingContext();
-  const { currentUser } = useRealmContext();
 
   useEffect(() => {
     setIsLoading(acLoading || asLoading || cLoading || sLoading);

@@ -1,5 +1,19 @@
 import { SxProps, Theme } from '@mui/material';
 
+import { DrawerWidth } from 'ts/enums';
+
+export const boxStyle: SxProps<Theme> = ({ breakpoints, spacing }) => ({
+  padding: spacing(2),
+
+  [breakpoints.down('sm')]: {
+    width: DrawerWidth.Mobile,
+  },
+
+  [breakpoints.up('sm')]: {
+    width: DrawerWidth.Desktop,
+  },
+});
+
 export const inputStyle: SxProps<Theme> = ({ spacing }) => ({
   marginBottom: spacing(2),
 
