@@ -1,5 +1,5 @@
 export * from './ErrorAlert/ErrorAlert';
 export * from './InputForm/InputForm';
-export * from './LoginButton/LoginButton';
-export * from './LoginDialog/LoginDialog';
+export * from './Links/Links';
+export * from './LoginPanel/LoginPanel';
 export * from './PodImage/PodImage';

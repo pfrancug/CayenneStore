@@ -1,53 +1,80 @@
 import {
   AppBar,
   Box,
-  Button,
   Container,
+  Divider,
+  IconButton,
   LinearProgress,
+  SwipeableDrawer,
   Toolbar,
   Typography,
 } from '@mui/material';
-import { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { Menu, Person, PersonOutline } from '@mui/icons-material';
+import { FC, useState } from 'react';
 
-import {
-  buttonsBoxStyle,
-  cayenneStyle,
-  linkStyle,
-  pageButtonStyle,
-  storeStyle,
-} from './styles';
-import { LoginButton } from 'components';
+import { cayenneStyle, logoStyle, menuStyle, storeStyle } from './styles';
+import { Links, LoginPanel } from 'components';
 import { useLoadingContext } from 'contexts';
+import { useIsLocalUser, useIsUpSmBreakpoint } from 'hooks';
 import { AppName } from 'ts/enums';
-import { Pages } from 'utils/constants';
 
 export const Navigation: FC = () => {
   const { isLoading } = useLoadingContext();
+  const [isDrawerOpen, setIsDraweOpen] = useState(false);
+  const isLocalUser = useIsLocalUser();
+  const isUpSmBreakpoint = useIsUpSmBreakpoint();
+
+  const handleDrawerState = () => {
+    setIsDraweOpen((prevState) => !prevState);
+  };
+
+  const Icon: FC = () => {
+    if (!isUpSmBreakpoint) {
+      return <Menu />;
+    } else if (isLocalUser) {
+      return <Person />;
+    } else {
+      return <PersonOutline />;
+    }
+  };
 
   return (
     <>
       <AppBar position="static">
         <Container maxWidth="lg">
           <Toolbar>
-            <Typography sx={cayenneStyle}>{AppName.Cayenne}</Typography>
-            <Typography sx={storeStyle}>{AppName.Store}</Typography>
-            <Box sx={buttonsBoxStyle}>
-              {Pages.map(({ isMenuVisible, path, page }) => {
-                if (isMenuVisible) {
-                  return (
-                    <Link key={page} style={linkStyle} to={path}>
-                      <Button sx={pageButtonStyle}>{page}</Button>
-                    </Link>
-                  );
-                }
+            <IconButton
+              color="inherit"
+              edge="start"
+              onClick={handleDrawerState}
+              sx={menuStyle}
+            >
+              <Icon />
+            </IconButton>
 
-                return null;
-              })}
+            <Box sx={logoStyle}>
+              <Typography sx={cayenneStyle}>{AppName.Cayenne}</Typography>
+              <Typography sx={storeStyle}>{AppName.Store}</Typography>
             </Box>
-            <LoginButton />
+
+            {isUpSmBreakpoint ? <Links /> : null}
           </Toolbar>
         </Container>
+        <SwipeableDrawer
+          anchor="left"
+          onClose={handleDrawerState}
+          onOpen={handleDrawerState}
+          open={isDrawerOpen}
+        >
+          {isUpSmBreakpoint ? null : (
+            <>
+              <Links />
+              <Divider sx={{ flexGrow: 1 }} />
+            </>
+          )}
+
+          <LoginPanel onLoginSuccess={handleDrawerState} />
+        </SwipeableDrawer>
       </AppBar>
       <LinearProgress
         color="success"
