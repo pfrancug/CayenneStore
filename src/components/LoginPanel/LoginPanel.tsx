@@ -4,7 +4,7 @@ import { Credentials, MongoDBRealmError } from 'realm-web';
 
 import { alertStyle, boxStyle, inputStyle, submitStyle } from './styles';
 import { useRealmContext } from 'contexts';
-import { useIsAnonUser, useIsLocalUser } from 'hooks';
+import { useUser } from 'hooks';
 import { Errors, Login } from 'ts/enums';
 
 interface LoginModalProps {
@@ -13,12 +13,11 @@ interface LoginModalProps {
 
 export const LoginPanel: FC<LoginModalProps> = ({ onLoginSuccess }) => {
   const { app, currentUser, setCurrentUser } = useRealmContext();
+  const { isAnonUser, isLocalUser } = useUser();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
   const [loginError, setLoginError] = useState<null | string>(null);
-  const isAnonUser = useIsAnonUser();
-  const isLocalUser = useIsLocalUser();
 
   useEffect(() => {
     const condition =

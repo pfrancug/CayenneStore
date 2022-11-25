@@ -8,7 +8,7 @@ export enum Peppers {
   Origin = 'Origin',
   ParentPlant = 'Parent Plant',
   ParentSeed = 'Parent Seed',
-  PodPhoto = 'Pod Photo',
+  PodPhoto = 'Add Photo',
   SHU = 'SHU',
   Source = 'Source',
   Species = 'Species',

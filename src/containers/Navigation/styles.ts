@@ -27,13 +27,13 @@ export const logoStyle: SxProps<Theme> = ({
 });
 
 export const cayenneStyle: SxProps<Theme> = ({ palette, typography }) => ({
-  color: palette.error.dark,
+  color: palette.error.main,
   fontSize: 'inherit',
   fontWeight: typography.fontWeightMedium,
 });
 
 export const storeStyle: SxProps<Theme> = ({ palette, typography }) => ({
-  color: palette.common.white,
+  color: palette.text.primary,
   fontSize: 'inherit',
   fontWeight: typography.fontWeightLight,
 });

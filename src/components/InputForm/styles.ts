@@ -1,8 +1,7 @@
 import { SxProps, Theme } from '@mui/material';
 
 export const containerStyle: SxProps<Theme> = ({ spacing }) => ({
-  marginBottom: spacing(2),
-  padding: 0,
+  padding: spacing(2),
 });
 
 export const gridContainerStyle: SxProps<Theme> = () => ({

@@ -4,6 +4,7 @@ import {
   MutationFunctionOptions,
   OperationVariables,
 } from '@apollo/client';
+import dayjs from 'dayjs';
 import { FieldValues } from 'react-hook-form';
 import { User } from 'realm-web';
 
@@ -22,14 +23,14 @@ export const onAddCultivarSubmit = (
   ) => Promise<unknown>,
   user: User | null,
 ) => {
-  const date = new Date();
+  const newDate = dayjs();
 
   insertFunction({
     variables: {
       data: {
-        creation_date: date,
+        creation_date: newDate,
         cultivar: inputValidation(data.cultivar),
-        last_update_date: date,
+        last_update_date: newDate,
         origin: inputValidation(data.origin),
         owner_id: user?.id ?? null,
         scoville_scale: {

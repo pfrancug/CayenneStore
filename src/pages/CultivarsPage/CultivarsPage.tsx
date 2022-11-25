@@ -18,14 +18,16 @@ import {
 import { ErrorAlert, InputForm } from 'components';
 import { useLoadingContext, useRealmContext } from 'contexts';
 import { useGetCultivars } from 'gql';
+import { useUser } from 'hooks';
 import { Maybe } from 'schemas';
-import { InputFormType, ProviderTypes } from 'ts/enums';
+import { InputFormType } from 'ts/enums';
 import { CultivarTableHeaders } from 'utils/constants';
 
 export const CultivarsPage: FC = () => {
   const { data, error, loading, refetch } = useGetCultivars();
   const { setIsLoading } = useLoadingContext();
   const { currentUser } = useRealmContext();
+  const { isLocalUser } = useUser();
 
   useEffect(() => {
     setIsLoading(loading);
@@ -54,10 +56,10 @@ export const CultivarsPage: FC = () => {
   }, [cultivars]);
 
   if (error) {
-    return <ErrorAlert message={error.message} />;
+    return <ErrorAlert maxWidth={700} message={error.message} />;
   }
 
-  if (loading || !sortedCultivars) {
+  if (loading) {
     return null;
   }
 
@@ -66,56 +68,61 @@ export const CultivarsPage: FC = () => {
 
   return (
     <>
-      <TableContainer component={Paper} sx={containerStyle}>
-        <Table stickyHeader size="small">
-          <TableHead>
-            <TableRow>
-              {CultivarTableHeaders.map(({ colSpan, label }) => (
-                <TableCell
-                  align="center"
-                  colSpan={colSpan}
-                  key={label}
-                  sx={tableHeaderStyle}
-                >
-                  {label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {sortedCultivars.map(
-              ({ _id, cultivar, origin, scoville_scale, species }) => (
-                <TableRow key={_id as string}>
-                  <TableCell component="th" scope="row" sx={columnHeaderStyle}>
-                    {cultivar}
+      {sortedCultivars ? (
+        <TableContainer component={Paper} sx={containerStyle}>
+          <Table stickyHeader size="small">
+            <TableHead>
+              <TableRow>
+                {CultivarTableHeaders.map(({ colSpan, label }) => (
+                  <TableCell
+                    align="center"
+                    colSpan={colSpan}
+                    key={label}
+                    sx={tableHeaderStyle}
+                  >
+                    {label}
                   </TableCell>
-                  <TableCell sx={cellStyle}>{species}</TableCell>
-                  {scoville_scale?.from === null ? (
-                    <TableCell align="center" colSpan={2} sx={cellStyle}>
-                      {localiseValue(scoville_scale?.to)}
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {sortedCultivars.map(
+                ({ _id, cultivar, origin, scoville_scale, species }) => (
+                  <TableRow key={_id as string}>
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      sx={columnHeaderStyle}
+                    >
+                      {cultivar}
                     </TableCell>
-                  ) : (
-                    <>
-                      <TableCell align="center" sx={cellStyle}>
-                        {localiseValue(scoville_scale?.from)}
-                      </TableCell>
-                      <TableCell align="center" sx={cellStyle}>
+                    <TableCell sx={cellStyle}>{species}</TableCell>
+                    {scoville_scale?.from === null ? (
+                      <TableCell align="center" colSpan={2} sx={cellStyle}>
                         {localiseValue(scoville_scale?.to)}
                       </TableCell>
-                    </>
-                  )}
-                  <TableCell align="center" sx={cellStyle}>
-                    {origin}
-                  </TableCell>
-                </TableRow>
-              ),
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      {currentUser?.providerType === ProviderTypes.LocalUserpass ? (
-        <InputForm type={InputFormType.Cultivar} />
+                    ) : (
+                      <>
+                        <TableCell align="center" sx={cellStyle}>
+                          {localiseValue(scoville_scale?.from)}
+                        </TableCell>
+                        <TableCell align="center" sx={cellStyle}>
+                          {localiseValue(scoville_scale?.to)}
+                        </TableCell>
+                      </>
+                    )}
+                    <TableCell align="center" sx={cellStyle}>
+                      {origin}
+                    </TableCell>
+                  </TableRow>
+                ),
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
       ) : null}
+
+      {isLocalUser ? <InputForm type={InputFormType.Cultivar} /> : null}
     </>
   );
 };

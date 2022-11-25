@@ -9,7 +9,7 @@ interface ErrorAlertProps {
 }
 
 export const ErrorAlert: FC<ErrorAlertProps> = ({ maxWidth, message }) => (
-  <Alert severity="error" sx={{ maxWidth, mb: 3, mx: 'auto' }}>
+  <Alert severity="error" sx={{ maxWidth, mx: 'auto', my: 2 }}>
     <AlertTitle>{Errors.Error}</AlertTitle>
     {message}
   </Alert>

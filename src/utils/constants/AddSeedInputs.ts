@@ -14,7 +14,7 @@ export const AddSeedInputs: Array<AddInputs> = [
   },
   {
     id: SeedProps.Date,
-    inputType: InputTypes.Text,
+    inputType: InputTypes.Date,
     label: Peppers.Date,
   },
   {
