@@ -1,7 +1,6 @@
 export enum Peppers {
   Cultivar = 'Cultivar',
   Date = 'Date',
-  Details = 'Details',
   Heat = 'Heat (SHU)',
   HeatFrom = 'Heat MIN',
   HeatTo = 'Heat MAX',

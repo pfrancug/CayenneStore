@@ -23,11 +23,6 @@ export const AddSeedInputs: Array<AddInputs> = [
     label: Peppers.Source,
   },
   {
-    id: SeedProps.Details,
-    inputType: InputTypes.Text,
-    label: Peppers.Details,
-  },
-  {
     id: SeedProps.ParentSeed,
     inputType: InputTypes.Number,
     label: Peppers.ParentSeed,

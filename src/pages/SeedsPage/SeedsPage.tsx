@@ -68,16 +68,7 @@ export const SeedsPage: FC = () => {
           </TableHead>
           <TableBody>
             {sortedSeeds.map(
-              ({
-                _id,
-                cultivar,
-                date,
-                details,
-                id,
-                image,
-                parent_seed,
-                source,
-              }) => (
+              ({ _id, cultivar, date, id, image, parent_seed, source }) => (
                 <TableRow key={_id as string}>
                   <TableCell
                     align="center"
@@ -93,9 +84,6 @@ export const SeedsPage: FC = () => {
                   </TableCell>
                   <TableCell align="center" sx={cellStyle}>
                     {source}
-                  </TableCell>
-                  <TableCell align="center" sx={cellStyle}>
-                    {details}
                   </TableCell>
                   <TableCell align="center" sx={cellStyle}>
                     {parent_seed}

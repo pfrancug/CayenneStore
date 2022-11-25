@@ -43,7 +43,7 @@ export const onAddSeedSubmit = async (
         image: image ?? null,
         last_update_date: date,
         owner_id: user?.id ?? null,
-        parent: inputValidation(data.parent),
+        parent_seed: inputValidation(data.parent),
         source: inputValidation(data.source),
       } as SeedInsertInput,
     },
