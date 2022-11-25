@@ -4,6 +4,8 @@ export const containerStyle: SxProps<Theme> = ({ breakpoints, spacing }) => ({
   alignSelf: 'center',
   margin: spacing(2, 'auto'),
   maxWidth: 700,
+  WebkitBackfaceVisibility: 'hidden',
+  WebkitTransform: 'translate3d(0, 0, 0)',
 
   [breakpoints.down('sm')]: {
     maxHeight: `calc(100vh - 88px)`,
