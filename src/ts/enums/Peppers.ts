@@ -1,7 +1,6 @@
 export enum Peppers {
   Cultivar = 'Cultivar',
   Date = 'Date',
-  Details = 'Details',
   Heat = 'Heat (SHU)',
   HeatFrom = 'Heat MIN',
   HeatTo = 'Heat MAX',
@@ -9,7 +8,7 @@ export enum Peppers {
   Origin = 'Origin',
   ParentPlant = 'Parent Plant',
   ParentSeed = 'Parent Seed',
-  PodPhoto = 'Pod Photo',
+  PodPhoto = 'Add Photo',
   SHU = 'SHU',
   Source = 'Source',
   Species = 'Species',

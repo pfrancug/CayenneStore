@@ -1,7 +1,5 @@
-import { App, Credentials } from 'realm-web';
+import { App, Credentials, DEFAULT_BASE_URL } from 'realm-web';
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
-
-import { realmConfig } from 'configs';
 
 const getValidAccessToken = async (app: App) => {
   if (!app.currentUser) {
@@ -14,7 +12,7 @@ const getValidAccessToken = async (app: App) => {
 };
 
 export const client = (app: App) => {
-  const uri = `https://realm.mongodb.com/api/client/v2.0/app/${realmConfig.appId}/graphql`;
+  const uri = `${DEFAULT_BASE_URL}/api/client/v2.0/app/${app.id}/graphql`;
 
   return new ApolloClient({
     cache: new InMemoryCache(),

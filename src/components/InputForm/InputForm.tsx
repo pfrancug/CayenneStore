@@ -6,6 +6,8 @@ import {
   TextField,
   Unstable_Grid2,
 } from '@mui/material';
+import { DesktopDatePicker, MobileDatePicker } from '@mui/x-date-pickers';
+import dayjs from 'dayjs';
 import { FC, useEffect } from 'react';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
 
@@ -20,6 +22,7 @@ import { ErrorAlert } from 'components';
 import { useLoadingContext, useRealmContext } from 'contexts';
 import { useAddCultivar, useAddSeed, useGetCultivars, useGetSeeds } from 'gql';
 import { onAddCultivarSubmit, onAddSeedSubmit } from 'helpers';
+import { useBreakpoints } from 'hooks';
 import { InputFormType, InputTypes, Operations } from 'ts/enums';
 import { AddCultivarInputs, AddSeedInputs } from 'utils/constants';
 
@@ -28,9 +31,10 @@ interface InputFormProps {
 }
 
 export const InputForm: FC<InputFormProps> = ({ type }) => {
+  const { isUpSmBreakpoint } = useBreakpoints();
+  const { control, getValues, register, handleSubmit, reset } = useForm();
   const { loading: cLoading, refetch: cRefetch } = useGetCultivars();
   const { loading: sLoading, refetch: sRefetch } = useGetSeeds();
-  const { control, register, handleSubmit, reset } = useForm();
   const { setIsLoading } = useLoadingContext();
   const { currentUser } = useRealmContext();
   const [
@@ -39,6 +43,7 @@ export const InputForm: FC<InputFormProps> = ({ type }) => {
   ] = useAddCultivar();
   const [insertOneSeed, { data: asData, error: asError, loading: asLoading }] =
     useAddSeed();
+  const newDate = dayjs();
 
   useEffect(() => {
     setIsLoading(acLoading || asLoading || cLoading || sLoading);
@@ -73,6 +78,10 @@ export const InputForm: FC<InputFormProps> = ({ type }) => {
   const seedInputs = type === InputFormType.Seed ? AddSeedInputs : null;
   const inputs = cultivarInputs ?? seedInputs;
 
+  if (!inputs || inputs.length === 0) {
+    return null;
+  }
+
   return (
     <Container
       component="form"
@@ -91,7 +100,7 @@ export const InputForm: FC<InputFormProps> = ({ type }) => {
         rowSpacing={1}
         sx={gridContainerStyle}
       >
-        {inputs?.map(({ endAdornment, id, inputType, label }) => (
+        {inputs.map(({ endAdornment, id, inputType, label }) => (
           <Unstable_Grid2 key={label} sm={6} xs={12}>
             {inputType === InputTypes.File ? (
               <Button
@@ -106,9 +115,49 @@ export const InputForm: FC<InputFormProps> = ({ type }) => {
             ) : (
               <Controller
                 control={control}
-                defaultValue=""
+                defaultValue={inputType === InputTypes.Date ? newDate : ''}
                 name={id}
                 render={({ field }) => {
+                  if (inputType === InputTypes.Date) {
+                    return isUpSmBreakpoint ? (
+                      <DesktopDatePicker
+                        {...field}
+                        inputFormat="MM/YY"
+                        label={label}
+                        openTo="year"
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            color="success"
+                            size="small"
+                            sx={inputStyle}
+                            variant="outlined"
+                          />
+                        )}
+                        value={getValues(field.name)}
+                        views={['year', 'month']}
+                      />
+                    ) : (
+                      <MobileDatePicker
+                        {...field}
+                        inputFormat="MM/YY"
+                        label={label}
+                        openTo="year"
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            color="success"
+                            size="small"
+                            sx={inputStyle}
+                            variant="outlined"
+                          />
+                        )}
+                        value={getValues(field.name)}
+                        views={['year', 'month']}
+                      />
+                    );
+                  }
+
                   return (
                     <TextField
                       {...field}
@@ -132,7 +181,7 @@ export const InputForm: FC<InputFormProps> = ({ type }) => {
             )}
           </Unstable_Grid2>
         ))}
-        <Unstable_Grid2 sm={6} xs={12} sx={gridStyle}>
+        <Unstable_Grid2 sm={inputs.length % 2 ? 6 : 12} xs={12} sx={gridStyle}>
           <Button
             color="success"
             sx={submitStyle}

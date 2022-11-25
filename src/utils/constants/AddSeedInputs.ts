@@ -14,18 +14,13 @@ export const AddSeedInputs: Array<AddInputs> = [
   },
   {
     id: SeedProps.Date,
-    inputType: InputTypes.Text,
+    inputType: InputTypes.Date,
     label: Peppers.Date,
   },
   {
     id: SeedProps.Source,
     inputType: InputTypes.Text,
     label: Peppers.Source,
-  },
-  {
-    id: SeedProps.Details,
-    inputType: InputTypes.Text,
-    label: Peppers.Details,
   },
   {
     id: SeedProps.ParentSeed,

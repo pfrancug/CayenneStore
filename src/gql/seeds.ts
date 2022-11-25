@@ -13,7 +13,6 @@ export const getSeeds = gql`
       creation_date
       cultivar
       date
-      details
       id
       image
       last_update_date
@@ -33,7 +32,6 @@ export const addSeed = gql`
       creation_date
       cultivar
       date
-      details
       id
       image
       last_update_date

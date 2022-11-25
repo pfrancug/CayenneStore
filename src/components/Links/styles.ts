@@ -22,7 +22,7 @@ export const pageButtonStyle: SxProps<Theme> = ({
   palette,
   spacing,
 }) => ({
-  color: palette.common.white,
+  color: palette.text.primary,
 
   [breakpoints.down('sm')]: {
     padding: spacing(1, 2),

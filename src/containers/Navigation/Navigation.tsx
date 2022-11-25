@@ -15,14 +15,14 @@ import { FC, useState } from 'react';
 import { cayenneStyle, logoStyle, menuStyle, storeStyle } from './styles';
 import { Links, LoginPanel } from 'components';
 import { useLoadingContext } from 'contexts';
-import { useIsLocalUser, useIsUpSmBreakpoint } from 'hooks';
+import { useBreakpoints, useUser } from 'hooks';
 import { AppName } from 'ts/enums';
 
 export const Navigation: FC = () => {
+  const { isUpSmBreakpoint } = useBreakpoints();
   const { isLoading } = useLoadingContext();
+  const { isLocalUser } = useUser();
   const [isDrawerOpen, setIsDraweOpen] = useState(false);
-  const isLocalUser = useIsLocalUser();
-  const isUpSmBreakpoint = useIsUpSmBreakpoint();
 
   const handleDrawerState = () => {
     setIsDraweOpen((prevState) => !prevState);

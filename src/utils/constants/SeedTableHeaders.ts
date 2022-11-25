@@ -6,7 +6,6 @@ export const SeedTableHeaders: Array<TableHeader> = [
   { label: Peppers.Cultivar },
   { label: Peppers.Date },
   { label: Peppers.Source },
-  { label: Peppers.Details },
   { label: Peppers.ParentSeed },
   { label: Peppers.PodPhoto },
 ];
